@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "sie5/rWm42SZU9uzdPC3l8lKc0DjOxmYCskuIGx2+go=",
+  "Source": "landscape-architecture.WebAPI",
+  "BasePath": "_content/landscape-architecture.WebAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
