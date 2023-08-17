@@ -1,2 +1,4 @@
-﻿  dllmain.cpp
-  ConversionScripts.vcxproj -> C:\Users\parke\OneDrive\Desktop\Code\landscape-AR\landscape-architecture.WebAPI\x64\Debug\ConversionScripts.dll
+﻿  pch.cpp
+  dllmain.cpp
+     Creating library C:\Users\quibb\code\DXG\landscape-ar\landscape-architecture.WebAPI\x64\Debug\ConversionScripts.lib and object C:\Users\quibb\code\DXG\landscape-ar\landscape-architecture.WebAPI\x64\Debug\ConversionScripts.exp
+  ConversionScripts.vcxproj -> C:\Users\quibb\code\DXG\landscape-ar\landscape-architecture.WebAPI\x64\Debug\ConversionScripts.dll
