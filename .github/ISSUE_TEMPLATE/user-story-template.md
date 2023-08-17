@@ -24,3 +24,5 @@ To close a task, add an 'x' as follows - [x].
 Add criteria that must be met for this ticket to be closed,
 such as completing all linked tasks.
 -->
+- Linked Tasks are closed
+- Necessary Documentation is added
