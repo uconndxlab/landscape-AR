@@ -481,3 +481,4 @@ $RECYCLE.BIN/
 *.lnk
 /landscape-architecture.WebAPI/ConversionScripts/x64/Debug/ConversionScripts.log
 /landscape-architecture.WebAPI/.vs/landscape-architecture.WebAPI/v17/.suo
+/landscape-architecture.WebAPI/.vs/landscape-architecture.WebAPI/v17/Browse.VC.db
