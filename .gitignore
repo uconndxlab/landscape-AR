@@ -485,3 +485,5 @@ $RECYCLE.BIN/
 /landscape-architecture.WebAPI/landscape-architecture.WebAPI/bin/Debug/
 *.dll
 *.pdb
+/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj.user
+/landscape-architecture.WebAPI/landscape-architecture.WebAPI/bin/Debug/net7.0/landscape-architecture.WebAPI.pdb
