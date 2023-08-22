@@ -487,3 +487,5 @@ $RECYCLE.BIN/
 *.pdb
 /landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj.user
 /landscape-architecture.WebAPI/landscape-architecture.WebAPI/bin/Debug/net7.0/landscape-architecture.WebAPI.pdb
+/landscape-architecture.WebAPI/landscape-architecture.WebAPI/ConversionScripts.exp
+/landscape-architecture.WebAPI/landscape-architecture.WebAPI/ConversionScripts.lib

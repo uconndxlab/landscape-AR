@@ -51,7 +51,8 @@ namespace landscape_architecture.WebAPI.Services
             }
             return new TopoDTO();
         }
-        [DllImport(@"C:\Users\parke\OneDrive\Desktop\Code\landscape-AR\landscape-architecture.WebAPI\x64\Debug\ConversionScripts.dll", CallingConvention = CallingConvention.Cdecl, SetLastError = true)]
+
+        [DllImport("ConversionScripts.dll", CallingConvention = CallingConvention.Cdecl, SetLastError = true)]
         public static extern bool objectToTopo(ref InputParams inputParams);
     }
 }
