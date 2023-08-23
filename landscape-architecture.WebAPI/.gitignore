@@ -479,9 +479,17 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Custom
+.vs/
 /.vs/
-/ConversionScripts/
+/.vs/landscape-architecture.WebAPI/v17
+/ConversionScripts/Debug/
+/ConversionScripts/Release/
 /landscape-architecture.WebAPI/obj/Debug/
 /landscape-architecture.WebAPI/bin/Debug/
+/Debug/
+/Release/
+/x64/
 *.dll
 *.pdb
