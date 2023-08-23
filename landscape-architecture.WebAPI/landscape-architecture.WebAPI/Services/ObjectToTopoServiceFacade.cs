@@ -13,7 +13,7 @@ namespace landscape_architecture.WebAPI.Services
     };
     public class ObjectToTopoServiceFacade : IObjectToTopoServiceFacade
     {
-        public ObjectToTopoServiceFacade() { } 
+        public ObjectToTopoServiceFacade() { }
 
         public TopoDTO GetTopo()
         {
@@ -47,11 +47,12 @@ namespace landscape_architecture.WebAPI.Services
                 topoDTO.XSize = inputParams.xSize;
                 topoDTO.YSize = inputParams.ySize;
                 topoDTO.Grid = gridOut;
-                return topoDTO; 
+                return topoDTO;
             }
             return new TopoDTO();
         }
-        [DllImport(@"C:\Users\parke\OneDrive\Desktop\Code\landscape-AR\landscape-architecture.WebAPI\x64\Debug\ConversionScripts.dll", CallingConvention = CallingConvention.Cdecl, SetLastError = true)]
+
+        [DllImport("ConversionScripts.dll", CallingConvention = CallingConvention.Cdecl, SetLastError = true)]
         public static extern bool objectToTopo(ref InputParams inputParams);
     }
 }
