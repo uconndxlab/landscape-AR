@@ -486,8 +486,8 @@ $RECYCLE.BIN/
 /.vs/landscape-architecture.WebAPI/v17
 /ConversionScripts/Debug/
 /ConversionScripts/Release/
-/landscape-architecture.WebAPI/obj/Debug/
-/landscape-architecture.WebAPI/bin/Debug/
+/landscape-architecture.WebAPI/obj/
+/landscape-architecture.WebAPI/bin/
 /Debug/
 /Release/
 /x64/
