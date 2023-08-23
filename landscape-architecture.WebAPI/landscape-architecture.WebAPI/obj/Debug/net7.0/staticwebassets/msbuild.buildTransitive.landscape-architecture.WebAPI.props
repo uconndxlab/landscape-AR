@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\landscape-architecture.WebAPI.props" />
+</Project>
