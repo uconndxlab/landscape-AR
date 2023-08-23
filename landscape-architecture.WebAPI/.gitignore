@@ -488,8 +488,10 @@ $RECYCLE.BIN/
 /ConversionScripts/Release/
 /landscape-architecture.WebAPI/obj/
 /landscape-architecture.WebAPI/bin/
+/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj.user
 /Debug/
 /Release/
 /x64/
 *.dll
 *.pdb
+*.user
