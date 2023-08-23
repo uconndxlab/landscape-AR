@@ -8,6 +8,9 @@
 /landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj.user
 /landscape-architecture.WebAPI/landscape-architecture.WebAPI/obj/
 /landscape-architecture.WebAPI/landscape-architecture.WebAPI/bin/
+/landscape-architecture.WebAPI/landscape-architecture.WebAPI.tests/obj/
+/landscape-architecture.WebAPI/landscape-architecture.WebAPI.tests/bin/
+
 
 #Junk Files
 *.DS_Store
