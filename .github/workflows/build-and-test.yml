@@ -22,6 +22,10 @@ jobs:
         dotnet-version: 6.0.x
     - name: Restore dependencies
       run: dotnet restore /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI
+    - name: Setup VS
+    - uses: jamesmontemagno/setup-msbuild@v1
+      with:
+        visualstudio-version: '2022'
     - name: Build
       run: dotnet build /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI --no-restore
     - name: Test
