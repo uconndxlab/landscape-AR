@@ -6,7 +6,7 @@ namespace landscape_architecture.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/v0/[controller]")]
-    public class ModelController : Controller
+    public class ModelController : ControllerBase
     {
         readonly IObjectToTopoServiceFacade _objectToTopoServiceFacade;
 
