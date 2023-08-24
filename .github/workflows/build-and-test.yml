@@ -20,11 +20,9 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
-    - name: Print working directory
-      run: pwd
     - name: Restore dependencies
-      run: dotnet restore ..\..\landscape-architecture.WebAPI\
+      run: dotnet restore /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI
     - name: Build
-      run: dotnet build ..\..\landscape-architecture.WebAPI\ --no-restore
+      run: dotnet build /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI --no-restore
     - name: Test
-      run: dotnet test ..\..\landscape-architecture.WebAPI\ --no-build --verbosity normal
+      run: dotnet test /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI --no-build --verbosity normal
