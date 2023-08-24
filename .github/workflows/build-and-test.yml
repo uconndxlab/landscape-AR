@@ -22,10 +22,10 @@ jobs:
         dotnet-version: 7.0.x
       
     - name: Restore dependencies
-      run: dotnet restore /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI
+      run: dotnet restore /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj
       
     - name: Build
-      run: dotnet build /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI --no-restore
+      run: dotnet build /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj --no-restore
       
     - name: Test
       run: dotnet test /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI --no-build --verbosity normal
