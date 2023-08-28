@@ -8,11 +8,13 @@ namespace landscape_architecture.WebAPI.Controllers
     [Route("api/v0/[controller]")]
     public class ModelController : ControllerBase
     {
-        readonly IObjectToTopoServiceFacade _objectToTopoServiceFacade;
+        readonly IObjectToTopoService _objectToTopoServiceFacade;
+        readonly ILogger<ModelController> _logger;
 
-        public ModelController(IObjectToTopoServiceFacade objectToTopoServiceFacade)
+        public ModelController(IObjectToTopoService objectToTopoServiceFacade, ILogger<ModelController> logger)
         {
             _objectToTopoServiceFacade = objectToTopoServiceFacade;
+            _logger = logger;
         }
 
         [HttpGet]

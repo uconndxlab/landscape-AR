@@ -11,9 +11,9 @@ namespace landscape_architecture.WebAPI.Services
         public int zSize;
         public IntPtr grid;
     };
-    public class ObjectToTopoServiceFacade : IObjectToTopoServiceFacade
+    public class ObjectToTopoService : IObjectToTopoService
     {
-        public ObjectToTopoServiceFacade() { }
+        public ObjectToTopoService() { }
 
         public TopoDTO GetTopo()
         {

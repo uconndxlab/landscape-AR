@@ -6,7 +6,22 @@ using System.Threading.Tasks;
 
 namespace landscape_architecture.WebAPI.Tests.Controllers
 {
-    internal class UsersControllerUnitTests
+    [TestClass]
+    public class UsersControllerTests
     {
+        [TestMethod]
+        public void TestGetAllUsersReturnsSuccess() { }
+
+        [TestMethod]
+        public void TestGetUserByIdReturnsSuccess() { }
+
+        [TestMethod]
+        public void TestPutUserReturnsSuccess() { }
+
+        [TestMethod]
+        public void TestDeleteUserReturnsSuccess() { }
+
+        [TestMethod]
+        public void TestUpdateUserReturnsSuccess() { }
     }
 }
