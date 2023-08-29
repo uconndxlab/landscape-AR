@@ -1,4 +1,4 @@
-namespace landscape_architecture.WebAPI.Tests
+namespace landscape_architecture.WebAPI.Tests.Controllers
 {
     [TestClass]
     public class ModelControllerTests
