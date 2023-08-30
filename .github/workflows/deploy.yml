@@ -34,7 +34,7 @@ jobs:
     - name: Stop landscape-architecture-WebAPI.service
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command: sudo service landscape-architecture-WebAPI stop
+        command: service landscape-architecture-WebAPI stop
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
         password: ${{ secrets.REMOTE_PASSWORD }}
@@ -58,7 +58,7 @@ jobs:
     - name: Start landscape-architecture-WebAPI.service
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command: sudo service landscape-architecture-WebAPI start
+        command: service landscape-architecture-WebAPI start
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
         password: ${{ secrets.REMOTE_PASSWORD }}
