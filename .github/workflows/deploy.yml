@@ -54,24 +54,10 @@ jobs:
       env:
         ASPNETCORE_ENVIRONMENT: Development
 
-    - name: Copy to NGINX target on Server
+    - name: Copy files on Server to deploy directory
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command: sudo cp -r \
-                /home/qmiller/Microsoft.AspNetCore.OpenApi.dll \
-                /home/qmiller/landscape-architecture.WebAPI \
-                /home/qmiller/Microsoft.OpenApi.dll \
-                /home/qmiller/landscape-architecture.WebAPI.deps.json \
-                /home/qmiller/Swashbuckle.AspNetCore.Swagger.dll \
-                /home/qmiller/landscape-architecture.WebAPI.dll \
-                /home/qmiller/Swashbuckle.AspNetCore.SwaggerGen.dll \
-                /home/qmiller/landscape-architecture.WebAPI.pdb \
-                /home/qmiller/Swashbuckle.AspNetCore.SwaggerUI.dll \
-                /home/qmiller/landscape-architecture.WebAPI.runtimeconfig.json \
-                /home/qmiller/appsettings.Development.json \
-                /home/qmiller/web.config \
-                /home/qmiller/appsettings.json \
-                /var/www/LAAR-WebApi.dxgdev.info/
+        command: sudo cp -r /home/qmiller/* /var/www/LAAR-WebApi.dxgdev.info/
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
         password: ${{ secrets.REMOTE_PASSWORD }}
