@@ -1,0 +1,75 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: Deploy WebApi
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  Deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+      
+    - name: Restore dependencies
+      run: dotnet restore /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj
+      
+    - name: Build
+      run: dotnet build /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj --no-restore
+      
+    - name: Test
+      run: dotnet test /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj --no-build --verbosity normal
+
+    - name: Publish
+      run: dotnet publish /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj -c Debug
+
+    - name: Stop landscape-architecture-WebAPI.service
+      uses: garygrossgarten/github-action-ssh@release
+      with:
+        command: sudo systemctl stop landscape-architecture-WebAPI
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        password: ${{ secrets.REMOTE_PASSWORD }}
+        passphrase: ${{ secrets.PASSPHRASE }}
+        privateKey: ${{ secrets.REMOTE_SSH_KEY }}
+
+    - name: Copy to Server via SCP
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        password: ${{ secrets.REMOTE_PASSWORD }}
+        local: /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/bin/Debug/net7.0/publish/
+        remote: /home/qmiller/
+        passphrase: ${{ secrets.PASSPHRASE }}
+        privateKey: ${{ secrets.REMOTE_SSH_KEY }}
+      env:
+        ASPNETCORE_ENVIRONMENT: Development
+
+    - name: Copy files on Server to deploy directory
+      uses: garygrossgarten/github-action-ssh@release
+      with:
+        command: sudo cp -r /home/qmiller/* /var/www/LAAR-WebApi.dxgdev.info/
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        password: ${{ secrets.REMOTE_PASSWORD }}
+        passphrase: ${{ secrets.PASSPHRASE }}
+        privateKey: ${{ secrets.REMOTE_SSH_KEY }}
+
+    - name: Start landscape-architecture-WebAPI.service
+      uses: garygrossgarten/github-action-ssh@release
+      with:
+        command: sudo systemctl start landscape-architecture-WebAPI
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        password: ${{ secrets.REMOTE_PASSWORD }}
+        passphrase: ${{ secrets.PASSPHRASE }}
+        privateKey: ${{ secrets.REMOTE_SSH_KEY }}
