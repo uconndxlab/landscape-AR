@@ -42,13 +42,16 @@ jobs:
         privateKey: ${{ secrets.REMOTE_SSH_KEY }}
 
     - name: Copy to Server via SCP
-      uses: appleboy/scp-action@v0.1.4
+      uses: garygross/github-action-scp@release
       with:
+        concurrency: 10
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
         password: ${{ secrets.REMOTE_PASSWORD }}
-        source: "/home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/bin/Debug/net7.0/publish/"
-        target: ${{ secrets.REMOTE_TARGET }}
+        local: /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/bin/Debug/net7.0/publish/
+        remote: ${{ secrets.REMOTE_TARGET }}
+        passphrase: ${{ secrets.PASSPHRASE }}
+        privateKey: ${{ secrets.REMOTE_SSH_KEY }}
       env:
         ASPNETCORE_ENVIRONMENT: Development
 
