@@ -48,7 +48,7 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         password: ${{ secrets.REMOTE_PASSWORD }}
         local: /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/bin/Debug/net7.0/publish/
-        remote: ${{ secrets.REMOTE_TARGET }}
+        remote: /home/qmiller/
         passphrase: ${{ secrets.PASSPHRASE }}
         privateKey: ${{ secrets.REMOTE_SSH_KEY }}
       env:
@@ -57,7 +57,7 @@ jobs:
     - name: Copy to NGINX target on Server
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command: sudo cp -r ${{ secrets.REMOTE_TARGET }} ${{ secrets.DEPLOY_TARGET }}
+        command: sudo cp -r /home/qmiller/ /var/www/LAAR-WebApi.dxgdev.info
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
         password: ${{ secrets.REMOTE_PASSWORD }}
