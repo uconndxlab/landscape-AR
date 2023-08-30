@@ -31,7 +31,7 @@ server {
         server_name LAAR-WebApi.dxgdev.info;
 
         location / {
-                proxy_pass http://localhost:5000;
+                proxy_pass http://localhost:5060;
                 proxy_http_version 1.1;
                 proxy_set_header Upgrade $http_upgrade;
                 proxy_set_header Connection keep-alive;
@@ -42,6 +42,7 @@ server {
         }
 }
 ```
-7. Setup and configured mysql server
-8. Deployment completed by Github Actions Workflow to achive an automated CI/CD pipeline.
+7. Added SSL for https with certbot: ```sudo certbot --nginx -d LAAR-WebApi.dxgdev.info```
+9. Setup and configured mysql server
+10. Ran the Deployment Github Actions pipeline to deploy the project to the server
 
