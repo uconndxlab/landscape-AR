@@ -44,9 +44,7 @@ jobs:
     - name: Copy to Server
       uses: garygrossgarten/github-action-ssh@release
       with:
-        local: /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/bin/Debug/net7.0/publish/
-        concurrency: 10
-        remote: ${{ secrets.REMOTE_TARGET }}
+        command: scp /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/bin/Debug/net7.0/publish/ var/www/LAAR-WebApi.dxgdev.info
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
         password: ${{ secrets.REMOTE_PASSWORD }}
