@@ -32,7 +32,7 @@ jobs:
       run: dotnet publish /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj -c Debug
 
     - name: Stop landscape-architecture-WebAPI.service
-      uses: garygrossgarten/github-action-ssh@v0.6.3
+      uses: garygrossgarten/github-action-ssh@release
       with:
         command: service landscape-architecture-WebAPI.service stop
         host: ${{ secrets.REMOTE_HOST }}
@@ -54,7 +54,7 @@ jobs:
         ASPNETCORE_ENVIRONMENT: Development
 
     - name: Start landscape-architecture-WebAPI.service
-      uses: garygrossgarten/github-action-ssh@v0.6.3
+      uses: garygrossgarten/github-action-ssh@release
       with:
         command: service landscape-architecture-WebAPI.service start
         host: ${{ secrets.REMOTE_HOST }}
