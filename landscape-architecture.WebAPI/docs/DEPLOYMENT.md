@@ -10,7 +10,7 @@ Description=LandscapeArchitectureWebApi
 
 [Service]
 WorkingDirectory=/var/www/LAAR-WebApi.dxgdev.info
-ExecStart=/usr/bin/dotnet /var/www/LAAR-WebApi.dxgdev.info/DemoApplication.dll
+ExecStart=/usr/bin/dotnet /var/www/LAAR-WebApi.dxgdev.info/landscape-architecture.WebAPI.dll
 Restart=always
 RestartSec=10
 SyslogIdentifier=LandscapeArchitectureWebApi
