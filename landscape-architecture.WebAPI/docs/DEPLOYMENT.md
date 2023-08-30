@@ -1,4 +1,3 @@
-# Dev Environment Deployment
 ## First Time Deployment Notes/Steps
 #### The following are notes taken when first deploying a development environment of the LA-AR WebApi to the dxdev info box VM. These steps can be replicated to redeploy the API on another VM.
 
