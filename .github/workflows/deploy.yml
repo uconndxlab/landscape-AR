@@ -54,6 +54,16 @@ jobs:
       env:
         ASPNETCORE_ENVIRONMENT: Development
 
+    - name: Copy to NGINX target on Server
+      uses: garygrossgarten/github-action-ssh@release
+      with:
+        command: sudo cp -r ${{ secrets.REMOTE_TARGET }} ${{ secrets.DEPLOY_TARGET }}
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        password: ${{ secrets.REMOTE_PASSWORD }}
+        passphrase: ${{ secrets.PASSPHRASE }}
+        privateKey: ${{ secrets.REMOTE_SSH_KEY }}
+
     - name: Start landscape-architecture-WebAPI.service
       uses: garygrossgarten/github-action-ssh@release
       with:
