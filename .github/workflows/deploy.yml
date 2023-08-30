@@ -29,7 +29,7 @@ jobs:
       run: dotnet test /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj --no-build --verbosity normal
 
     - name: Publish
-      run: dotnet publish /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/ -c Debug
+      run: dotnet publish /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj -c Debug
 
     - name: Stop landscape-architecture-WebAPI.service
       uses: garygrossgarten/github-action-ssh@v0.6.3
