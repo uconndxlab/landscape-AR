@@ -42,14 +42,7 @@ jobs:
         privateKey: ${{ secrets.REMOTE_SSH_KEY }}
 
     - name: Copy to Server
-      uses: garygrossgarten/github-action-ssh@release
-      with:
-        command: scp /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/bin/Debug/net7.0/publish/ var/www/LAAR-WebApi.dxgdev.info
-        host: ${{ secrets.REMOTE_HOST }}
-        username: ${{ secrets.REMOTE_USER }}
-        password: ${{ secrets.REMOTE_PASSWORD }}
-        passphrase: ${{ secrets.PASSPHRASE }}
-        privateKey: ${{ secrets.REMOTE_SSH_KEY }}
+      run: scp -r /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/bin/Debug/net7.0/publish/ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/var/www/LAAR-WebApi.dxgdev.info
       env:
         ASPNETCORE_ENVIRONMENT: Development
 
