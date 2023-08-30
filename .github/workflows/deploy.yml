@@ -42,7 +42,7 @@ jobs:
         privateKey: ${{ secrets.REMOTE_SSH_KEY }}
 
     - name: Copy to Server via SCP
-      uses: garygross/github-action-scp@release
+      uses: arygrossgarten/github-action-scp@release
       with:
         concurrency: 10
         host: ${{ secrets.REMOTE_HOST }}
