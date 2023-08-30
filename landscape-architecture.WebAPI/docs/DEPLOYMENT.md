@@ -1,6 +1,6 @@
 # Dev Environment Deployment
 ## First Time Deployment Notes/Steps
-#### The following are notes taken when first deploying a development environment of the LA-AR WebApi to the dxdev info box VM.
+#### The following are notes taken when first deploying a development environment of the LA-AR WebApi to the dxdev info box VM. These steps can be replicated to redeploy the API on another VM.
 
 1. Installed .NET 7 SDK (which includes the runtime) by running the following command: ```sudo apt-get install -y dotnet-sdk-7.0```
 2. As of now, did not run this command (which installs a bunch of libraries that usually are automatically installed when using a package manager, but I want to keep this command here: ```sudo apt install -y libc6 libgcc1 libgcc-s1 libgssapi-krb5-2 libicu70 liblttng-ust1 libssl3 libstdc++6 libunwind8 zlib1g```
@@ -43,5 +43,6 @@ server {
         }
 }
 ```
-#### Configuring and Setting Up MySQL
-7. 
+7. Setup and configured mysql server
+8. Deployment completed by Github Actions Workflow to achive an automated CI/CD pipeline.
+
