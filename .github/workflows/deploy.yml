@@ -22,8 +22,11 @@ jobs:
     - name: setup-msbuild       
       uses: microsoft/setup-msbuild@v1
 
-    - name: print current directory test
+    - name: print working directory
       run: pwd
+
+    - name: print directory contents
+      run: dir
       
     - name: Restore dependencies
       run: dotnet restore landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj
