@@ -68,7 +68,7 @@ jobs:
     - name: Copy files on Server to deploy directory
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command: sudo cp -r /home/qmiller/* /var/www/LAAR-WebApi.dxgdev.info/
+        command: sudo cp -r /home/qmiller/* /var/www/laar-webapi.dxgdev.info/
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
         password: ${{ secrets.REMOTE_PASSWORD }}
