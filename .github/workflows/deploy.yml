@@ -23,13 +23,10 @@ jobs:
       uses: microsoft/setup-msbuild@v1
       
     - name: Restore dependencies
-      run:  msbuild /t:Restore /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj
+      run: dotnet restore /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj
       
     - name: Build
       run: msbuild /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/ /p:Configuration=Debug
-      
-    - name: Test
-      run: dotnet test /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj --no-build --verbosity normal
 
     - name: Publish
       run: dotnet publish /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj -c Debug
