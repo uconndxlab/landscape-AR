@@ -54,47 +54,14 @@ jobs:
       env:
         ASPNETCORE_ENVIRONMENT: Development
 
-    - name: Copy Conversion Scripts to Server via SCP (1/4)
+    - name: Copy Conversion Scripts to Server via SCP
       uses: garygrossgarten/github-action-scp@release
       with:
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
         password: ${{ secrets.REMOTE_PASSWORD }}
-        local: .\landscape-architecture.WebAPI\landscape-architecture.WebAPI\ConversionScripts.dll
+        local: .\landscape-architecture.WebAPI\landscape-architecture.WebAPI\ConversionScripts.*
         remote: /home/qmiller/ConversionScripts.dll
-        passphrase: ${{ secrets.PASSPHRASE }}
-        privateKey: ${{ secrets.REMOTE_SSH_KEY }}
-
-    - name: Copy Conversion Scripts to Server via SCP (2/4)
-      uses: garygrossgarten/github-action-scp@release
-      with:
-        host: ${{ secrets.REMOTE_HOST }}
-        username: ${{ secrets.REMOTE_USER }}
-        password: ${{ secrets.REMOTE_PASSWORD }}
-        local: .\landscape-architecture.WebAPI\landscape-architecture.WebAPI\ConversionScripts.exp
-        remote: /home/qmiller/ConversionScripts.exp
-        passphrase: ${{ secrets.PASSPHRASE }}
-        privateKey: ${{ secrets.REMOTE_SSH_KEY }}
-
-    - name: Copy Conversion Scripts to Server via SCP (3/4)
-      uses: garygrossgarten/github-action-scp@release
-      with:
-        host: ${{ secrets.REMOTE_HOST }}
-        username: ${{ secrets.REMOTE_USER }}
-        password: ${{ secrets.REMOTE_PASSWORD }}
-        local: .\landscape-architecture.WebAPI\landscape-architecture.WebAPI\ConversionScripts.lib
-        remote: /home/qmiller/ConversionScripts.pdb
-        passphrase: ${{ secrets.PASSPHRASE }}
-        privateKey: ${{ secrets.REMOTE_SSH_KEY }}
-
-    - name: Copy Conversion Scripts to Server via SCP (4/4)
-      uses: garygrossgarten/github-action-scp@release
-      with:
-        host: ${{ secrets.REMOTE_HOST }}
-        username: ${{ secrets.REMOTE_USER }}
-        password: ${{ secrets.REMOTE_PASSWORD }}
-        local: .\landscape-architecture.WebAPI\landscape-architecture.WebAPI\ConversionScripts.pdb
-        remote: /home/qmiller/ConversionScripts.pdb
         passphrase: ${{ secrets.PASSPHRASE }}
         privateKey: ${{ secrets.REMOTE_SSH_KEY }}
 
