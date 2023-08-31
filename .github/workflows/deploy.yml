@@ -10,7 +10,7 @@ on:
 jobs:
   Deploy:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v3
@@ -20,10 +20,10 @@ jobs:
         dotnet-version: 7.0.x
       
     - name: Restore dependencies
-      run: dotnet restore /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj
+      run:  msbuild /t:Restore /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/
       
     - name: Build
-      run: dotnet build /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj --no-restore
+      run: msbuild /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/ /p:Configuration=Debug
       
     - name: Test
       run: dotnet test /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj --no-build --verbosity normal
@@ -53,6 +53,53 @@ jobs:
         privateKey: ${{ secrets.REMOTE_SSH_KEY }}
       env:
         ASPNETCORE_ENVIRONMENT: Development
+
+    - name: Copy Conversion Scripts to Server via SCP (1/4)
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        password: ${{ secrets.REMOTE_PASSWORD }}
+        local: /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/ConversionScripts.dll
+        remote: /home/qmiller/ConversionScripts.dll
+        passphrase: ${{ secrets.PASSPHRASE }}
+        privateKey: ${{ secrets.REMOTE_SSH_KEY }}
+
+    - name: Copy Conversion Scripts to Server via SCP (2/4)
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        password: ${{ secrets.REMOTE_PASSWORD }}
+        local: /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/ConversionScripts.exp
+          - /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/ConversionScripts.lib 
+          - /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/ConversionScripts.pdb
+        remote: /home/qmiller/ConversionScripts.exp
+        passphrase: ${{ secrets.PASSPHRASE }}
+        privateKey: ${{ secrets.REMOTE_SSH_KEY }}
+
+    - name: Copy Conversion Scripts to Server via SCP (3/4)
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        password: ${{ secrets.REMOTE_PASSWORD }}
+        local: /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/ConversionScripts.lib
+          - /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/ConversionScripts.pdb
+        remote: /home/qmiller/ConversionScripts.pdb
+        passphrase: ${{ secrets.PASSPHRASE }}
+        privateKey: ${{ secrets.REMOTE_SSH_KEY }}
+
+    - name: Copy Conversion Scripts to Server via SCP (4/4)
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        password: ${{ secrets.REMOTE_PASSWORD }}
+        local: /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/ConversionScripts.pdb
+        remote: /home/qmiller/ConversionScripts.pdb
+        passphrase: ${{ secrets.PASSPHRASE }}
+        privateKey: ${{ secrets.REMOTE_SSH_KEY }}
 
     - name: Copy files on Server to deploy directory
       uses: garygrossgarten/github-action-ssh@release
