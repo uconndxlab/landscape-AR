@@ -23,13 +23,13 @@ jobs:
       uses: microsoft/setup-msbuild@v1
       
     - name: Restore dependencies
-      run: dotnet restore landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj
+      run: dotnet restore .\landscape-architecture.WebAPI\
 
     - name: Build
-      run: msbuild landscape-AR/landscape-architecture.WebAPI/ /p:Configuration=Debug
+      run: msbuild .\landscape-architecture.WebAPI\ /p:Configuration=Debug
 
     - name: Publish
-      run: dotnet publish landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj -c Debug
+      run: dotnet publish .\landscape-architecture.WebAPI\landscape-architecture.WebAPI.csproj -c Debug
 
     - name: Stop landscape-architecture-WebAPI.service
       uses: garygrossgarten/github-action-ssh@release
@@ -60,7 +60,7 @@ jobs:
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
         password: ${{ secrets.REMOTE_PASSWORD }}
-        local: landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/ConversionScripts.dll
+        local: landscape-architecture.WebAPI/landscape-architecture.WebAPI/ConversionScripts.dll
         remote: /home/qmiller/ConversionScripts.dll
         passphrase: ${{ secrets.PASSPHRASE }}
         privateKey: ${{ secrets.REMOTE_SSH_KEY }}
@@ -71,7 +71,7 @@ jobs:
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
         password: ${{ secrets.REMOTE_PASSWORD }}
-        local: landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/ConversionScripts.exp
+        local: landscape-architecture.WebAPI/landscape-architecture.WebAPI/ConversionScripts.exp
         remote: /home/qmiller/ConversionScripts.exp
         passphrase: ${{ secrets.PASSPHRASE }}
         privateKey: ${{ secrets.REMOTE_SSH_KEY }}
@@ -82,7 +82,7 @@ jobs:
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
         password: ${{ secrets.REMOTE_PASSWORD }}
-        local: landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/ConversionScripts.lib
+        local: landscape-architecture.WebAPI/landscape-architecture.WebAPI/ConversionScripts.lib
         remote: /home/qmiller/ConversionScripts.pdb
         passphrase: ${{ secrets.PASSPHRASE }}
         privateKey: ${{ secrets.REMOTE_SSH_KEY }}
@@ -93,7 +93,7 @@ jobs:
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
         password: ${{ secrets.REMOTE_PASSWORD }}
-        local: landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/ConversionScripts.pdb
+        local: landscape-architecture.WebAPI/landscape-architecture.WebAPI/ConversionScripts.pdb
         remote: /home/qmiller/ConversionScripts.pdb
         passphrase: ${{ secrets.PASSPHRASE }}
         privateKey: ${{ secrets.REMOTE_SSH_KEY }}
