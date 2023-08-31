@@ -19,16 +19,16 @@ jobs:
       with:
         dotnet-version: 7.0.x
 
-    - name: setup-msbuild       
-      uses: microsoft/setup-msbuild@v1
+    # - name: setup-msbuild       
+    #   uses: microsoft/setup-msbuild@v1
       
     - name: Restore dependencies
       run:  dotnet restore /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj
       
-    - name: Build
-      run: msbuild /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/ /p:Configuration=Debug
     # - name: Build
-    #   run: dotnet build /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj --no-restore
+    #   run: msbuild /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/ /p:Configuration=Debug
+    - name: Build
+      run: dotnet build /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj --no-restore
       
     - name: Test
       run: dotnet test /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj --no-build --verbosity normal
