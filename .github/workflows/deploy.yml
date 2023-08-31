@@ -21,17 +21,10 @@ jobs:
 
     - name: setup-msbuild       
       uses: microsoft/setup-msbuild@v1
-
-    - name: print working directory
-      run: pwd
-
-    - name: print directory contents
-      run: dir
       
     - name: Restore dependencies
       run: dotnet restore landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj
 
-      
     - name: Build
       run: msbuild landscape-AR/landscape-architecture.WebAPI/ /p:Configuration=Debug
 
