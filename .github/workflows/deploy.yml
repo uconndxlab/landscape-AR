@@ -23,7 +23,7 @@ jobs:
       uses: microsoft/setup-msbuild@v1
 
     - name: print current directory test
-      run: chdir
+      run: pwd
       
     - name: Restore dependencies
       run: dotnet restore landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj
