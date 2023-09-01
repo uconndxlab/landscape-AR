@@ -14,7 +14,8 @@ ExecStart=/usr/bin/dotnet /var/www/laar-webapi.dxgdev.info/landscape-architectur
 Restart=always
 RestartSec=10
 SyslogIdentifier=LandscapeArchitectureWebApi
-User=www-data
+User=qmiller
+Group=www-data
 Environment=ASPNETCORE_ENVIRONMENT=Debug
 Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=true
 
