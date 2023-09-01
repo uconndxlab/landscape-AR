@@ -9,8 +9,8 @@
 Description=LandscapeArchitectureWebApi
 
 [Service]
-WorkingDirectory=/var/www/LAAR-WebApi.dxgdev.info
-ExecStart=/usr/bin/dotnet /var/www/LAAR-WebApi.dxgdev.info/landscape-architecture.WebAPI.dll
+WorkingDirectory=/var/www/laar-webapi.dxgdev.info
+ExecStart=/usr/bin/dotnet /var/www/laar-webapi.dxgdev.info/landscape-architecture.WebAPI.dll
 Restart=always
 RestartSec=10
 SyslogIdentifier=LandscapeArchitectureWebApi
@@ -22,11 +22,11 @@ Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=true
 WantedBy=multi-user.target
 ```
 4. Since this file represents a service, and we want the service to automatically restart if the VM reboots, I ran this command: ```sudo systemctl enable landscape-architecture-WebAPI.service```
-5. Ran the following command to make a directory to store the project: ```sudo mkdir /var/www/LAAR-WebApi.dxgdev.info```
-6. Next, created a server file for the nginx project using the command: ```sudo nano /etc/nginx/sites-enabled/LAAR-WebApi.dxgdev.info```. The contents of the file currently are as follows:
+5. Ran the following command to make a directory to store the project: ```sudo mkdir /var/www/laar-webapi.dxgdev.info```
+6. Next, created a server file for the nginx project using the command: ```sudo nano /etc/nginx/sites-enabled/laar-webapi.dxgdev.info```. The contents of the file currently are as follows:
 ```
 server {
-        root /var/www/LAAR-WebApi.dxgdev.info/;
+        root /var/www/laar-webapi.dxgdev.info/;
         index index.html index.htm index.nginx-debian.html;
         server_name LAAR-WebApi.dxgdev.info;
 
@@ -42,7 +42,7 @@ server {
         }
 }
 ```
-7. Added SSL for https with certbot: ```sudo certbot --nginx -d LAAR-WebApi.dxgdev.info```
+7. Added SSL for https with certbot: ```sudo certbot --nginx -d laar-webapi.dxgdev.info```
 9. Setup and configured mysql server
 10. Ran the Deployment Github Actions pipeline to deploy the project to the server
 
