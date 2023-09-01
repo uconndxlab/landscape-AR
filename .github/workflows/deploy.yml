@@ -47,7 +47,7 @@ jobs:
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
         password: ${{ secrets.REMOTE_PASSWORD }}
-        local: .\landscape-architecture.WebAPI\landscape-architecture.WebAPI\bin\Debug\net7.0\publish\
+        local: .\landscape-architecture.WebAPI\landscape-architecture.WebAPI\bin\Debug\net7.0\
         remote: /home/qmiller/
         passphrase: ${{ secrets.PASSPHRASE }}
         privateKey: ${{ secrets.REMOTE_SSH_KEY }}
