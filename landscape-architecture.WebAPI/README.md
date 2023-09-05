@@ -119,3 +119,5 @@ This section will cover the basic process for installing windows onto a mac via 
 5. After Windows is installed, your machine will boot in Windows and open a Boot Camp installer for Windows. Follow the on screen instructions to install Boot Camp and various drivers. You will then be asked to restart. If the Boot Camp installer does not open automatically, open it from the Windows menu and follow the same process.
 
 6. To switch between Windows and macOS, restart your machine, and hold Option (or Alt) ⌥ durring startup. You will then be able to select which volume to boot from.
+
+7. Continue following the above setup process to run the app for the first time.
