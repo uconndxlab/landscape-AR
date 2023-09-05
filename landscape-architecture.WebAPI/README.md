@@ -29,7 +29,8 @@ A more detailed look:
 
 2. Under Individual Components, make sure to select .NET Debugging with WSL, C++ for Linux Development, and C++ CMake Tools for Linux
 
-![image](https://github.com/uconndxlab/landscape-AR/assets/32872369/bf81151e-1bcc-4f63-87d4-342cea25b2d0)` ![image](https://github.com/uconndxlab/landscape-AR/assets/32872369/28d82329-da8f-4a8d-b435-109e8c7d9adc) ![image](https://github.com/uconndxlab/landscape-AR/assets/32872369/d9cbd381-9e20-46d5-adc0-44f1f798c59e)
+![image](https://github.com/uconndxlab/landscape-AR/assets/32872369/bf81151e-1bcc-4f63-87d4-342cea25b2d0)` ![image](https://github.com/uconndxlab/landscape-AR/assets/32872369/28d82329-da8f-4a8d-b435-109e8c7d9adc) ![image](https://github.com/uconndxlab/landscape-AR/assets/32872369/31dc173e-9873-4c76-8ad2-8d4b62c21355)
+
 
 3. Modify any other settings in the installer to your preferences, then select "Install while downloading" and press "Install"
 
