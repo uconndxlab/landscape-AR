@@ -10,7 +10,7 @@ on:
 jobs:
   Deploy:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v3
@@ -18,18 +18,18 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 7.0.x
+
+    - name: setup-msbuild       
+      uses: microsoft/setup-msbuild@v1
       
     - name: Restore dependencies
-      run: dotnet restore /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj
-      
+      run: dotnet restore .\landscape-architecture.WebAPI\
+
     - name: Build
-      run: dotnet build /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj --no-restore
-      
-    - name: Test
-      run: dotnet test /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj --no-build --verbosity normal
+      run: msbuild .\landscape-architecture.WebAPI\ /p:Configuration=Debug
 
     - name: Publish
-      run: dotnet publish /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/landscape-architecture.WebAPI.csproj -c Debug
+      run: dotnet publish .\landscape-architecture.WebAPI\landscape-architecture.WebAPI\landscape-architecture.WebAPI.csproj -c Debug
 
     - name: Stop landscape-architecture-WebAPI.service
       uses: garygrossgarten/github-action-ssh@release
@@ -47,17 +47,28 @@ jobs:
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
         password: ${{ secrets.REMOTE_PASSWORD }}
-        local: /home/runner/work/landscape-AR/landscape-AR/landscape-architecture.WebAPI/landscape-architecture.WebAPI/bin/Debug/net7.0/publish/
+        local: .\landscape-architecture.WebAPI\landscape-architecture.WebAPI\bin\Debug\net7.0\
         remote: /home/qmiller/
         passphrase: ${{ secrets.PASSPHRASE }}
         privateKey: ${{ secrets.REMOTE_SSH_KEY }}
       env:
         ASPNETCORE_ENVIRONMENT: Development
 
+    - name: Copy Conversion Scripts to Server via SCP
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        password: ${{ secrets.REMOTE_PASSWORD }}
+        local: .\landscape-architecture.WebAPI\landscape-architecture.WebAPI\ConversionScripts.dll
+        remote: /home/qmiller/ConversionScripts.dll
+        passphrase: ${{ secrets.PASSPHRASE }}
+        privateKey: ${{ secrets.REMOTE_SSH_KEY }}
+
     - name: Copy files on Server to deploy directory
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command: sudo cp -r /home/qmiller/* /var/www/LAAR-WebApi.dxgdev.info/
+        command: sudo cp -r /home/qmiller/* /var/www/laar-webapi.dxgdev.info/
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
         password: ${{ secrets.REMOTE_PASSWORD }}

@@ -10,6 +10,7 @@ A more detailed look:
 
 
 ## First Time Setup
+Note: this guide assumes development is done on a windows machine. For mac users, see the below section "Setup for mac".
 ### Prerequisites 
 - Visual Studio 2022 or above (See Visual Studio Setup)
 - .NET 7.0.400 SDK
@@ -27,7 +28,10 @@ A more detailed look:
   - Desktop Development with C++
   - Data Storage and Processing
 
-![image](https://github.com/uconndxlab/landscape-AR/assets/32872369/bf81151e-1bcc-4f63-87d4-342cea25b2d0)` ![image](https://github.com/uconndxlab/landscape-AR/assets/32872369/28d82329-da8f-4a8d-b435-109e8c7d9adc) ![image](https://github.com/uconndxlab/landscape-AR/assets/32872369/d9cbd381-9e20-46d5-adc0-44f1f798c59e)
+2. Under Individual Components, make sure to select .NET Debugging with WSL, C++ for Linux Development, and C++ CMake Tools for Linux
+
+![image](https://github.com/uconndxlab/landscape-AR/assets/32872369/bf81151e-1bcc-4f63-87d4-342cea25b2d0)` ![image](https://github.com/uconndxlab/landscape-AR/assets/32872369/28d82329-da8f-4a8d-b435-109e8c7d9adc) ![image](https://github.com/uconndxlab/landscape-AR/assets/32872369/31dc173e-9873-4c76-8ad2-8d4b62c21355)
+
 
 3. Modify any other settings in the installer to your preferences, then select "Install while downloading" and press "Install"
 
@@ -96,7 +100,27 @@ To run the tests:
 
 #### Important note: TDD is an important aspect of software development, and we are doing our due diligence in implementing new functionality into this project. Any new functionality added to the app are likely going to need new tests to ensure high code coverage, see CONTRIBUTING.md for more info.
 
+## Setup for mac
 
+While Visual Studio for mac supports ASP.NET and C# developmnent, there is no support for C++. Because of this, mac users will need to run windows via Boot Camp for development. This guide assumes the use of a mac with an Intel processor. For m1 and m2 machines, see this page: https://support.microsoft.com/en-us/windows/options-for-using-windows-11-with-mac-computers-with-apple-m1-and-m2-chips-cd15fd62-9b34-4b78-b0bc-121baa3c568c
 
+### Prerequisites
+- The latest version of macOS
+- At least 64GB of free storage space
 
+### Boot Camp Setup
+This section will cover the basic process for installing windows onto a mac via Boot Camp. Additional information can be found here, see https://support.apple.com/en-us/HT201468
 
+1. Aquire a Windows 10 iso file. See https://www.microsoft.com/en-us/software-download/windows10ISO. In the form, select "Windows 10 (multi-edition ISO) and your prefered language. Once selected, the download should start automatically.
+
+2. Open Boot Camp Assistant through Launchpad. Once Boot Camp Assistant has opened, select Continue.
+
+3. Follow the on screen instructions to allocate space for and set up the windows partition. The partition should be a minimum of 64GB to ensure space for visual studio and other required tools. You will also be asked to provide the ISO file aquired in step 1.
+
+4. After following all of the instructions, your machine will restart and you will be brought to the Windows installer. Follow the set up instructions to install windows.
+
+5. After Windows is installed, your machine will boot in Windows and open a Boot Camp installer for Windows. Follow the on screen instructions to install Boot Camp and various drivers. You will then be asked to restart. If the Boot Camp installer does not open automatically, open it from the Windows menu and follow the same process.
+
+6. To switch between Windows and macOS, restart your machine, and hold Option (or Alt) ⌥ durring startup. You will then be able to select which volume to boot from.
+
+7. Continue following the above setup process to run the app for the first time.
