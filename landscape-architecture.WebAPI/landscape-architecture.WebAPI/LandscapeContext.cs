@@ -1,26 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using landscape_architecture.WebAPI.Models;
+using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 namespace landscape_architecture.WebAPI;
 
 public partial class LandscapeContext : DbContext
 {
-    public LandscapeContext()
+    private readonly IConfiguration _configuration;
+    public LandscapeContext(IConfiguration configuration)
     {
+        _configuration = configuration;
     }
 
-    public LandscapeContext(DbContextOptions<LandscapeContext> options)
+    public LandscapeContext(DbContextOptions<LandscapeContext> options, IConfiguration configuration)
         : base(options)
     {
+        _configuration = configuration;
     }
 
     public DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=dxgdev.info;user=landscapear;password=Ca5ORv6J2!xr;database=landscape", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.34-mysql"));
+        => optionsBuilder.UseMySql(_configuration["ConnectionStrings:landscape"], Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.34-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

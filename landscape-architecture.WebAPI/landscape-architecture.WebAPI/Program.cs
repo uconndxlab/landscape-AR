@@ -30,6 +30,8 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
     options.KnownProxies.Add(IPAddress.Parse("157.230.214.250"));
 });
 
+var dbConnectionString = builder.Configuration["ConnectionStrings:landscape"];
+
 
 var app = builder.Build();
 

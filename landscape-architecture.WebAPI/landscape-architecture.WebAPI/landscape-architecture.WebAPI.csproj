@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>landscape_architecture.WebAPI</RootNamespace>
+    <UserSecretsId>5254bac5-7aef-4c9f-aa9c-8fcc7c0e5598</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
