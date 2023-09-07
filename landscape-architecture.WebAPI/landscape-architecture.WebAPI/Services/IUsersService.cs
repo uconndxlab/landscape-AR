@@ -4,14 +4,14 @@ namespace landscape_architecture.WebAPI.Services
 {
     public interface IUsersService
     {
-        public Task<List<UserDTO>> GetAllUsers();
+        Task<List<UserDTO>> GetAllUsers();
 
-        public Task<UserDTO> GetUserById(int id);
+        Task<UserDTO?> GetUserById(int id);
 
-        public void DeleteUserById(int id);
+        Task<bool> DeleteUserById(int id);
 
-        public void AddUser(UserDTO userDTO);
+        Task<bool> AddUser(UserDTO userDTO);
 
-        public void UpdateUser(UserDTO userDTO);
+        Task<bool> UpdateUser(UserDTO userDTO);
     }
 }

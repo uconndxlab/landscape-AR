@@ -28,28 +28,48 @@ namespace landscape_architecture.WebAPI.Controllers
         [Route("GetUserById")]
         public async Task<ActionResult<UserDTO>> GetUserById(int id)
         {
-            return await _usersService.GetUserById(id);
-        }
-
-        [HttpPut]
-        [Route("AddUser")]
-        public void AddUser(UserDTO user)
-        {
-            _usersService.AddUser(user);
+            var result = await _usersService.GetUserById(id);
+            if (result == null)
+            {
+                return NotFound("User not found");
+            }
+            return result;
         }
 
         [HttpPost]
-        [Route("UpdateUser")]
-        public void UpdateUser(UserDTO user)
+        [Route("AddUser")]
+        public async Task<ActionResult<UserDTO>> AddUser(UserDTO userDto)
         {
-            _usersService.UpdateUser(user);
+            var result = await _usersService.AddUser(userDto);
+            if (result == false)
+            {
+                return BadRequest("Invalid request parameters");
+            }
+            return Ok();
+        }
+
+        [HttpPut]
+        [Route("UpdateUser")]
+        public async Task<ActionResult<UserDTO>> UpdateUser(UserDTO userDto)
+        {
+            var result = await _usersService.UpdateUser(userDto);
+            if (result == false)
+            {
+                return BadRequest("Invalid request parameters");
+            }
+            return Ok();
         }
 
         [HttpDelete]
         [Route("DeleteUser")]
-        public void DeleteUser(int id)
+        public async Task<ActionResult<UserDTO>> DeleteUser(int id)
         {
-            _usersService.DeleteUserById(id);
+            var result = await _usersService.DeleteUserById(id);
+            if (result == false)
+            {
+                return NotFound("User not found");
+            }
+            return Ok();
         }
     }
 
