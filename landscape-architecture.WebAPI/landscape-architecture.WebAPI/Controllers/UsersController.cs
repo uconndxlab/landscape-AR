@@ -19,16 +19,16 @@ namespace landscape_architecture.WebAPI.Controllers
 
         [HttpGet]
         [Route("GetAllUsers")]
-        public ActionResult<List<UserDTO>> GetAllUsers()
+        public async Task<ActionResult<List<UserDTO>>> GetAllUsers()
         {
-            return _usersService.GetAllUsers();
+            return await _usersService.GetAllUsers();
         }
 
         [HttpGet]
         [Route("GetUserById")]
-        public ActionResult<UserDTO> GetUserById(int id)
+        public async Task<ActionResult<UserDTO>> GetUserById(int id)
         {
-            return _usersService.GetUserById(id);
+            return await _usersService.GetUserById(id);
         }
 
         [HttpPut]

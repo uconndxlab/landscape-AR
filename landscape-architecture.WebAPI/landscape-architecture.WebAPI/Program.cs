@@ -1,5 +1,7 @@
+using landscape_architecture.WebAPI;
 using landscape_architecture.WebAPI.Services;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.EntityFrameworkCore;
 using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +12,18 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<IObjectToTopoServiceFacade, ObjectToTopoServiceFacade>();
+builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddDbContext<LandscapeContext>();
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddSwaggerGen();
+// Enable CORS
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+    });
+});
 // Configure forwarded headers
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {

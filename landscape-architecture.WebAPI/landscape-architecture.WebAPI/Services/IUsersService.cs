@@ -4,9 +4,9 @@ namespace landscape_architecture.WebAPI.Services
 {
     public interface IUsersService
     {
-        public List<UserDTO> GetAllUsers();
+        public Task<List<UserDTO>> GetAllUsers();
 
-        public UserDTO GetUserById(int id);
+        public Task<UserDTO> GetUserById(int id);
 
         public void DeleteUserById(int id);
 
