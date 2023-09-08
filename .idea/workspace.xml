@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d7113bc7-8d62-44b6-9c0f-a27dfaca3e19" name="Changes" comment="dont need these">
-      <change beforePath="$PROJECT_DIR$/landscape-architecture/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/landscape-architecture/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/landscape-architecture/babel.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/landscape-architecture/jsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/landscape-architecture/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/landscape-architecture/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/landscape-architecture/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/landscape-architecture/public/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/landscape-architecture/src/App.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/landscape-architecture/src/assets/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/landscape-architecture/src/components/HelloWorld.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/landscape-architecture/src/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/landscape-architecture/vue.config.js" beforeDir="false" />
-    </list>
+    <list default="true" id="d7113bc7-8d62-44b6-9c0f-a27dfaca3e19" name="Changes" comment="dont need these" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,14 +30,14 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "topics/qrm/37__frontenddependencies",
+    "git-widget-placeholder": "topics/qrm/#18__dbsetup",
     "last_opened_file_path": "C:/Users/quibb/code/DXG/laar",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2023.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "ts.external.directory.path": "C:\\Users\\quibb\\code\\DXG\\laar\\landscape-architecture\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
