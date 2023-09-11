@@ -29,7 +29,7 @@ namespace landscape_architecture.WebAPI.Controllers
                 // TODO: Add more specific exception handling
                 return BadRequest("Invalid file upload");
             }
-            return Ok();
+            return Ok("Successfully uploaded file " + result);
         }
 
         [HttpGet]

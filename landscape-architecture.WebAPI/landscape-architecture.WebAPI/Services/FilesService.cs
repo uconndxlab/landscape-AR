@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using landscape_architecture.WebAPI.DTO;
 using landscape_architecture.WebAPI.Models;
-using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using System.Collections.Specialized;
+using System.Runtime.CompilerServices;
 
 namespace landscape_architecture.WebAPI.Services
 {
@@ -31,20 +31,24 @@ namespace landscape_architecture.WebAPI.Services
             {
                 FileInfo fileInfo = new FileInfo(formFile.FileName);
                 fileName = formFile.FileName + "_" + Guid.NewGuid().ToString() + fileInfo.Extension;
-                UploadedFile uploadedFile = new UploadedFile
+                using (MemoryStream stream = new MemoryStream())
                 {
-                    FileName = fileName,
-                    FileExtension = fileInfo.Extension,
-                    FileData = await File.ReadAllBytesAsync(formFile.FileName)
-                };
-                _context.UploadedFiles.Add(uploadedFile);
+                    await formFile.CopyToAsync(stream);
+                    UploadedFile uploadedFile = new UploadedFile()
+                    {
+                        FileName = fileName,
+                        FileData = stream.ToArray(),
+                        FileExtension = fileInfo.Extension
+                    };
+                    _context.UploadedFiles.Add(uploadedFile);
+                }
+
                 await _context.SaveChangesAsync();
                 return fileName;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                _logger.LogError(e.Message);
-                return "";
+                throw;
             }
         }
 

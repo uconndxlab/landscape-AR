@@ -7,15 +7,6 @@ using System.Net;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddScoped<IObjectToTopoServiceFacade, ObjectToTopoServiceFacade>();
-builder.Services.AddScoped<IUsersService, UsersService>();
-builder.Services.AddDbContext<LandscapeContext>();
-builder.Services.AddAutoMapper(typeof(Program).Assembly);
-builder.Services.AddSwaggerGen();
 // Enable CORS
 builder.Services.AddCors(options =>
 {
@@ -24,6 +15,16 @@ builder.Services.AddCors(options =>
         policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
     });
 });
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddScoped<IObjectToTopoServiceFacade, ObjectToTopoServiceFacade>();
+builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<IFilesService, FilesService>();
+builder.Services.AddDbContext<LandscapeContext>();
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddSwaggerGen();
 // Configure forwarded headers
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
