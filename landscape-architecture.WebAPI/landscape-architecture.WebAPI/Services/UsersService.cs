@@ -1,21 +1,18 @@
 ﻿using AutoMapper;
 using landscape_architecture.WebAPI.DTO;
 using landscape_architecture.WebAPI.Models;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using System.ComponentModel;
 
 namespace landscape_architecture.WebAPI.Services
 {
     public class UsersService : IUsersService
     {
-
+        private readonly ILogger<UsersService> _logger;
         private readonly LandscapeContext _context;
         private readonly IMapper _mapper;
-        public UsersService(LandscapeContext context, IMapper mapper) 
+        public UsersService(ILogger<UsersService> logger, LandscapeContext context, IMapper mapper) 
         {
+            this._logger = logger;
             this._context = context;
             this._mapper = mapper;
             var config = new MapperConfiguration(cfg =>
