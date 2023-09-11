@@ -4,6 +4,6 @@
     {
         Task<string> UploadFile(IFormFile formFile);
 
-        Task<(byte[], string, string)> DownloadFile(string fileName);
+        Task<(byte[], string, string)?> DownloadFile(string fileName);
     }
 }

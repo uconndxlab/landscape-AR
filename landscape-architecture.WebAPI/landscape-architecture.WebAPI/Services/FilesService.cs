@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using landscape_architecture.WebAPI.DTO;
 using landscape_architecture.WebAPI.Models;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace landscape_architecture.WebAPI.Services
 {
@@ -16,35 +18,45 @@ namespace landscape_architecture.WebAPI.Services
             this._context = context;
         }
 
+        /*
+         * Uploads a file to the database
+         * Takes an IFormFile from the controller, for now we are assuming this is a .obj 3D model file.
+         * This file will be stored in the database as a byte array, with a generated GUID as the file name and the file extension.
+         * Then we want to return the GUID to the controller as validation that the file was uploaded successfully.
+         */
         public async Task<string> UploadFile(IFormFile formFile)
         {
             string fileName = "";
             try
             {
                 FileInfo fileInfo = new FileInfo(formFile.FileName);
-                fileName = formFile.FileName + "_" + DateTime.Now.ToString("yyyyMMddHHmmss") + fileInfo.Extension;
-                // Get the file path of the fileName
-                var filePath = Path.GetFullPath(fileName);
-          
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                fileName = formFile.FileName + "_" + Guid.NewGuid().ToString() + fileInfo.Extension;
+                UploadedFile uploadedFile = new UploadedFile
                 {
-                    await formFile.CopyToAsync(fileStream);
-                }
+                    FileName = fileName,
+                    FileExtension = fileInfo.Extension,
+                    FileData = await File.ReadAllBytesAsync(formFile.FileName)
+                };
+                _context.UploadedFiles.Add(uploadedFile);
+                await _context.SaveChangesAsync();
                 return fileName;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                _logger.LogError(ex.Message);
-                return fileName;
+                _logger.LogError(e.Message);
+                return "";
             }
-
         }
 
-        public async Task<(byte[], string, string)> DownloadFile(string fileName)
+
+        /*
+         * Takes a file from the database to download
+         * TODO: Implement this, we likely want to use a DTO to pass the file data back to the controller
+         */
+        public async Task<(byte[], string, string)?> DownloadFile(string fileName)
         {
-            // Implement file download
+            var file = await _context.UploadedFiles.FirstOrDefaultAsync(f => f.FileName == fileName);
+            return null;
         }
-
-
     }
 }

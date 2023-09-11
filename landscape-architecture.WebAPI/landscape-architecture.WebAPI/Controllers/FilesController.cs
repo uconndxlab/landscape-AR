@@ -24,7 +24,7 @@ namespace landscape_architecture.WebAPI.Controllers
         public async Task<ActionResult> UploadFile(IFormFile file)
         {
             var result = await _filesService.UploadFile(file);
-            if (result == null)
+            if (result == "")
             {
                 // TODO: Add more specific exception handling
                 return BadRequest("Invalid file upload");
@@ -37,7 +37,12 @@ namespace landscape_architecture.WebAPI.Controllers
         public async Task<ActionResult> DownloadFile(string fileName)
         {
             var result = await _filesService.DownloadFile(fileName);
-            return File(result, "application/octet-stream"); // What content type do we want?
+            if (result == null)
+            {
+                return NotFound("File does not exist");
+            }
+            // return File(); How do we return a file?
+            return Ok();
         }
     }
 }
