@@ -3,7 +3,7 @@ using landscape_architecture.WebAPI.DTO;
 using landscape_architecture.WebAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Specialized;
-using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.StaticFiles;
 
 namespace landscape_architecture.WebAPI.Services
 {
@@ -41,9 +41,8 @@ namespace landscape_architecture.WebAPI.Services
                         FileExtension = fileInfo.Extension
                     };
                     _context.UploadedFiles.Add(uploadedFile);
+                    await _context.SaveChangesAsync();
                 }
-
-                await _context.SaveChangesAsync();
                 return fileName;
             }
             catch (Exception)
