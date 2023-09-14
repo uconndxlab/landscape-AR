@@ -48,6 +48,8 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
 });
 
+app.UseCors();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

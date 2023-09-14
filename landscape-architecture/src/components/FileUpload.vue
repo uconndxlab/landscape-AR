@@ -1,7 +1,7 @@
 <template>
   <v-container class="pa-6">
     <div class="d-flex">
-      <v-file-input 
+      <v-file-input
         @change="onFileSelected"
         @click:clear="clearFile"
         clearable
@@ -18,12 +18,12 @@
       </v-btn>
     </div>
   </v-container>
-  
+
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-// Correct my typescript if I'm wrong
+
 const file = ref<File | null>(null)
 
 // Call this function when user selects a file
@@ -45,8 +45,20 @@ const onSubmit = async () => {
     return
   }
 
-  console.log('Uploading file data:', file.value)
-  // Add logic to send file to server
+  // Send the file to the API which takes a IFormFile as input
+  const formData = new FormData()
+  formData.append('file', file.value)
+
+
+  const response = await fetch('https://localhost:4000/api/v0/Files/UploadFile', {
+    method: 'POST',
+    body: formData,
+  });
+
+  if (!response.ok) {
+    throw new Error('Upload failed');
+  }
+  console.log('Upload successful');
 }
 </script>
 

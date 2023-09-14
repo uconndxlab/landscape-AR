@@ -24,11 +24,11 @@ namespace landscape_architecture.WebAPI.Controllers
         public async Task<ActionResult> UploadFile(IFormFile file)
         {
             var result = await _filesService.UploadFile(file);
-            if (result == "")
+            if (!ModelState.IsValid)
             {
-                // TODO: Add more specific exception handling
-                return BadRequest("Invalid file upload");
+                return BadRequest(ModelState);
             }
+
             return Ok("Successfully uploaded file " + result);
         }
 
