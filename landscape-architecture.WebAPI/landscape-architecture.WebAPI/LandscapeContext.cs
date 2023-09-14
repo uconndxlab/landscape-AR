@@ -22,6 +22,8 @@ public partial class LandscapeContext : DbContext
 
     public DbSet<User> Users { get; set; }
 
+    public DbSet<UploadedFile> UploadedFiles { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseMySql(_configuration["ConnectionStrings:landscape"], Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.34-mysql"));
 
