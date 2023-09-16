@@ -21,9 +21,9 @@ namespace landscape_architecture.WebAPI.Controllers
 
         [HttpPost]
         [Route("UploadFile")]
-        public async Task<ActionResult> UploadFile(IFormFile file)
+        public async Task<ActionResult> UploadFile([FromForm] FileUploadDTO fileDto)
         {
-            var result = await _filesService.UploadFile(file);
+            var result = await _filesService.UploadFile(fileDto);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
