@@ -57,6 +57,7 @@ const onSubmit = async () => {
   }
 
   // Send the file to the API which takes a IFormFile as input
+  // TODO: change endpoint to environment variable and to deployed endpoint (when it is deployed)
   const response = await fetch('https://localhost:4000/api/v0/Files/UploadFile', {
     method: 'POST',
     body: formData,
