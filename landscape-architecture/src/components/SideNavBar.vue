@@ -2,13 +2,13 @@
     <v-navigation-drawer
       v-model="drawer"
       :rail="rail"
-      permanent=true
+      permanent
       @click="rail=false">
 
 
       <v-list
         density="compact"
-        nav=true>
+        nav>
         <v-list-item
           prepend-icon="mdi-menu"
           title="Landscape Architecture">
@@ -26,7 +26,7 @@
 
       <v-list
         density="compact"
-        nav=true>
+        nav>
         <v-list-item
           prepend-icon="mdi-folder"
           title="Files">
