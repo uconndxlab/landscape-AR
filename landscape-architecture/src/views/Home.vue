@@ -1,7 +1,13 @@
 <template>
-  <HelloWorld />
+  <v-container>
+    <v-row align="center">
+      <v-col cols="12" align-self="center">
+        <FileUpload />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts" setup>
-  import HelloWorld from '@/components/HelloWorld.vue'
+  import FileUpload from '@/components/FileUpload.vue'
 </script>

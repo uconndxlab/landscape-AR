@@ -1,5 +1,5 @@
 <template>
-  <v-container class="pa-6">
+  <v-card class="pa-6">
     <div class="d-flex">
       <v-file-input
         @change="onFileSelected"
@@ -18,7 +18,7 @@
         Upload
       </v-btn>
     </div>
-  </v-container>
+  </v-card>
 
 </template>
 
