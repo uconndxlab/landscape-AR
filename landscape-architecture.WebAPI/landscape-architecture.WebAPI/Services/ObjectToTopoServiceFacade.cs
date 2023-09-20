@@ -18,8 +18,8 @@ namespace landscape_architecture.WebAPI.Services
         public TopoDTO GetTopo()
         {
             InputParams inputParams = new InputParams();
-            inputParams.xSize = 5;
-            inputParams.ySize = 5;
+            inputParams.xSize = 32;
+            inputParams.ySize = 32;
             var result = objectToTopo(ref inputParams);
 
             if (result)
