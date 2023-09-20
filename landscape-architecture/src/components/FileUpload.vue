@@ -18,13 +18,22 @@
         Upload
       </v-btn>
     </div>
+
+    <div v-if="fileSelected" class="d-flex">
+      <ModelView :fileUrlPath="fileUrlPath" />
+    </div>
   </v-card>
 
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
+import ModelView from "@/components/ModelView.vue";
 
 const formData = new FormData();
+
+const fileSelected = ref(false);
+const fileUrlPath = ref('');
 
 // Call this function when user selects a file
 const onFileSelected = (event: Event) => {
@@ -35,6 +44,10 @@ const onFileSelected = (event: Event) => {
   if (file.name.split('.').pop() !== 'obj') {
     return;
   }
+
+  // Set the fileUrlPath to the path of the file
+  fileUrlPath.value = URL.createObjectURL(file);
+  fileSelected.value = true;
 
   // Add the file to the FormData object
   formData.append('formFile', file);
@@ -47,6 +60,8 @@ const onFileSelected = (event: Event) => {
 const clearFile = () => {
   formData.delete('formFile');
   formData.delete('fileName');
+  fileSelected.value = false;
+  fileUrlPath.value = '';
 }
 
 // When the submit button is clicked, upload the file

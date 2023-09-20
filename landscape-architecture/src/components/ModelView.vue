@@ -1,7 +1,9 @@
 <template>
-  <v-card>
-    <canvas ref="canvas"></canvas>
-  </v-card>
+  <v-row align="center">
+    <v-col cols="12" align-self="center">
+      <canvas ref="canvas"></canvas>
+    </v-col>
+  </v-row>
 </template>
 
 <script lang="ts" setup>
@@ -10,10 +12,10 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import * as THREE from 'three';
 
 const canvas = ref<HTMLCanvasElement>()
+const fileUrlPath = ref<string>();
 
 onMounted(() => {
   const scene = new THREE.Scene()
-
   const camera = new THREE.PerspectiveCamera(
       75,
       canvas.value!.clientWidth / canvas.value!.clientHeight,
@@ -27,11 +29,11 @@ onMounted(() => {
   // Load 3D model
   const loader = new OBJLoader()
   loader.load(
-      // Path to model from FileUpload
-      '/path/to/model.obj',
-      (object) => {
+    // Path to model from FileUpload
+    fileUrlPath.value!,
+    (object) => {
         scene.add(object)
-      }
+    }
   )
 
   function animate() {
