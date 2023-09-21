@@ -7,14 +7,17 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
+import {onMounted, ref} from 'vue';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import * as THREE from 'three';
 
 const canvas = ref<HTMLCanvasElement>()
-const fileUrlPath = ref<string>();
+const blobUrl = ref<string>()
 
 onMounted(() => {
+  // Get blobUrl from FileUpload
+  console.log('blobUrl from ModelView: ' + blobUrl.value)
+
   const scene = new THREE.Scene()
   const camera = new THREE.PerspectiveCamera(
       75,
@@ -28,13 +31,15 @@ onMounted(() => {
 
   // Load 3D model
   const loader = new OBJLoader()
+
   loader.load(
     // Path to model from FileUpload
-    fileUrlPath.value!,
+    blobUrl.value!,
     (object) => {
-        scene.add(object)
+      scene.add(object)
     }
   )
+
 
   function animate() {
     requestAnimationFrame(animate)

@@ -20,7 +20,7 @@
     </div>
 
     <div v-if="fileSelected" class="d-flex">
-      <ModelView :fileUrlPath="fileUrlPath" />
+      <ModelView :file="blobUrl" />
     </div>
   </v-card>
 
@@ -32,8 +32,8 @@ import ModelView from "@/components/ModelView.vue";
 
 const formData = new FormData();
 
-const fileSelected = ref(false);
-const fileUrlPath = ref('');
+const blobUrl = ref<string>('');
+const fileSelected = ref<boolean>(false);
 
 // Call this function when user selects a file
 const onFileSelected = (event: Event) => {
@@ -45,8 +45,9 @@ const onFileSelected = (event: Event) => {
     return;
   }
 
-  // Set the fileUrlPath to the path of the file
-  fileUrlPath.value = URL.createObjectURL(file);
+  // Update the ModelView component with the file
+  blobUrl.value = URL.createObjectURL(file);
+  console.log('blobUrl from FileUpload: ' + blobUrl.value);
   fileSelected.value = true;
 
   // Add the file to the FormData object
@@ -61,7 +62,6 @@ const clearFile = () => {
   formData.delete('formFile');
   formData.delete('fileName');
   fileSelected.value = false;
-  fileUrlPath.value = '';
 }
 
 // When the submit button is clicked, upload the file
