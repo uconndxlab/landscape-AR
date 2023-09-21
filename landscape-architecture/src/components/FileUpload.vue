@@ -32,7 +32,7 @@ import ModelView from "@/components/ModelView.vue";
 
 const formData = new FormData();
 
-const blobUrl = ref<string>('');
+const blobUrl = ref<string>();
 const fileSelected = ref<boolean>(false);
 
 // Call this function when user selects a file

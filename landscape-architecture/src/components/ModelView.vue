@@ -17,6 +17,7 @@ const blobUrl = ref<string>()
 onMounted(() => {
   // Get blobUrl from FileUpload
   console.log('blobUrl from ModelView: ' + blobUrl.value)
+  // TODO: why is the blobUrl undefined here?
 
   const scene = new THREE.Scene()
   const camera = new THREE.PerspectiveCamera(
