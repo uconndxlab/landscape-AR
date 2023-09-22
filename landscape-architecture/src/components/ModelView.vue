@@ -12,12 +12,17 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import * as THREE from 'three';
 
 const canvas = ref<HTMLCanvasElement>()
-const blobUrl = ref<string>()
+
+const props = defineProps({
+  blobUrl: {
+    type: String,
+    required: true
+  }
+})
 
 onMounted(() => {
   // Get blobUrl from FileUpload
-  console.log('blobUrl from ModelView: ' + blobUrl.value)
-  // TODO: why is the blobUrl undefined here?
+  console.log('blobUrl from ModelView: ' + props.blobUrl)
 
   const scene = new THREE.Scene()
   const camera = new THREE.PerspectiveCamera(
@@ -35,7 +40,7 @@ onMounted(() => {
 
   loader.load(
     // Path to model from FileUpload
-    blobUrl.value!,
+    props.blobUrl,
     (object) => {
       scene.add(object)
     }

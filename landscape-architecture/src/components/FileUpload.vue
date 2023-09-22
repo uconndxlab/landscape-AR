@@ -20,7 +20,7 @@
     </div>
 
     <div v-if="fileSelected" class="d-flex">
-      <ModelView :file="blobUrl" />
+      <ModelView :blobUrl="blobUrl as string" />
     </div>
   </v-card>
 
