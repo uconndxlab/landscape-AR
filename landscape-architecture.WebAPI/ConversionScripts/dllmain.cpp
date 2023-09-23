@@ -50,23 +50,11 @@ BOOL objectToTopo(InputParams* in) {
     }
     std::string baseDirectory = GetDLLDirectory();
     std::string filePath = baseDirectory + "landscape-architecture.WebAPI\\ConversionScripts\\StagedFiles\\untitled.obj";
-    std::cout << "FILEPATH:" << filePath << std::endl;
     ObjectToTopo ConversionObject(filePath, in->xSize, in->ySize, in->zSize, 'y'); // initialize conversion object with input params
     ConversionObject.readObj();
     ConversionObject.makeGrid();
     std::vector<std::vector<int> > grid = ConversionObject.getIntGrid();
-    std::ofstream test;
-    test.open(baseDirectory + "landscape-architecture.WebAPI\\ConversionScripts\\StagedFiles\\test.txt");
-    test << std::fixed;
-    test << std::setprecision(2);
-    for (std::vector<int> i : grid)
-    {
-        for (int j : i)
-        {
-            test << j << " ";
-        }
-        test << std::endl;
-    }
+
     // Fill 2d array with values
     for (int r = 0; r < in->xSize; r++)
     {
