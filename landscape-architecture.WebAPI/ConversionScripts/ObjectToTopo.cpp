@@ -67,7 +67,6 @@ void ObjectToTopo::readObj()
 			}
 
 			updateBound(v);
-
 			xyz.push_back(v);
 		}
 	}
@@ -77,12 +76,15 @@ void ObjectToTopo::makeGrid()
 {
 	// Initialize matrix
 	grid.resize(topoSize.x);
+	intGrid.resize(topoSize.x);
 	for (int i = 0; i < topoSize.x; i++)
 	{
 		grid[i].resize(topoSize.y);
+		intGrid[i].resize(topoSize.y);
 		for (int j = 0; j < topoSize.y; j++)
 		{
 			grid[i][j] = 0;
+			intGrid[i][j] = 0;
 		}
 	}
 
@@ -109,16 +111,12 @@ void ObjectToTopo::makeGrid()
 		}
 	}
 	normalize();
-
-	for (auto row : grid)
+	for (int i = 0; i < grid.size(); i++)
 	{
-		for (auto col : row)
+		for (int j = 0; j < grid.size(); j++)
 		{
-			std::cout << std::fixed;
-			std::cout << std::setprecision(2);
-			std::cout << col << " ";
+			intGrid[i][j] = static_cast<int>(grid[i][j] * 1000);
 		}
-		std::cout << std::endl;
 	}
 }
 
@@ -168,8 +166,8 @@ void ObjectToTopo::fixZeros()
 
 void ObjectToTopo::normalize()
 {
-	float max = FLT_MAX;
-	float min = FLT_MIN;
+	float max = FLT_MIN;
+	float min = FLT_MAX;
 
 	for (auto row : grid)
 	{
