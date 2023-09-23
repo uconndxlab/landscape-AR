@@ -6,7 +6,24 @@
 #include <fstream>
 #include <stdint.h>
 #include "ObjectToTopo.h"
+#include <iomanip>
+#include <Windows.h>
 
+
+std::string GetDLLDirectory() {
+    HMODULE hModule = GetModuleHandle(NULL);
+    char path[MAX_PATH];
+    if (GetModuleFileNameA(hModule, path, MAX_PATH) != 0) {
+        std::string fullPath(path);
+        std::size_t pos = fullPath.find("landscape-architecture.WebAPI");
+        fullPath = fullPath.substr(0, pos);
+        size_t lastBackslash = fullPath.find_last_of("\\/");
+        if (lastBackslash != std::string::npos) {
+            return fullPath.substr(0, lastBackslash + 1); // Include the trailing slash
+        }
+    }
+    return "";
+}
 
 struct InputParams
 {
@@ -31,28 +48,21 @@ BOOL objectToTopo(InputParams* in) {
         if (!pArray[i])
             return false;
     }
-
-    std::string filePath = "C:\\Users\\parke\\source\\repos\\landscape-AR\\landscape-architecture.WebAPI\\ConversionScripts\\StagedFiles\\gourd.obj";
+    std::string baseDirectory = GetDLLDirectory();
+    std::string filePath = baseDirectory + "landscape-architecture.WebAPI\\ConversionScripts\\StagedFiles\\untitled.obj";
     ObjectToTopo ConversionObject(filePath, in->xSize, in->ySize, in->zSize, 'y'); // initialize conversion object with input params
     ConversionObject.readObj();
     ConversionObject.makeGrid();
-    std::vector<std::vector<float> > grid = ConversionObject.getGrid();
-    std::ofstream test;
-    test.open("C:\\Users\\parke\\source\\repos\\landscape-AR\\landscape-architecture.WebAPI\\ConversionScripts\\StagedFiles\\test.txt");
-    for (std::vector<float> i : grid)
-    {
-        for (float j : i)
-        {
-            test << j << " ";
-        }
-        test << std::endl;
-    }
-    test.close();
+    std::vector<std::vector<int> > grid = ConversionObject.getIntGrid();
+
     // Fill 2d array with values
     for (int r = 0; r < in->xSize; r++)
+    {
         for (int j = 0; j < in->ySize; j++)
+        {
             pArray[r][j] = grid[r][j];
-
+        }
+    }
     in->grid = pArray;
 
     return true;

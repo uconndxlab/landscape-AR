@@ -26,6 +26,7 @@ public:
 	void makeGrid();
 	void dump();
 	std::vector<std::vector<float>> getGrid() { return grid; }
+	std::vector<std::vector<int>> getIntGrid() { return intGrid; }
 
 private:
 	Vec3 lCorner;		   // Lowest corner of object bounding box
@@ -33,6 +34,7 @@ private:
 	std::vector<Vec3> xyz; // Point cloud from obj file
 	std::string inFile;
 	std::vector<std::vector<float>> grid; // output xy grid of heights
+	std::vector<std::vector<int>> intGrid;
 	Vec3 topoSize;						  // Size of grid
 	Vec3 axis;							  // Which axis to represent as
 	char axisChar;
