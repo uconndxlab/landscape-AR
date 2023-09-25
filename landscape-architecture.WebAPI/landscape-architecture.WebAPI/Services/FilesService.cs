@@ -4,6 +4,7 @@ using landscape_architecture.WebAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Specialized;
 using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.AspNetCore.SignalR;
 
 namespace landscape_architecture.WebAPI.Services
 {
@@ -37,7 +38,7 @@ namespace landscape_architecture.WebAPI.Services
                 using (MemoryStream stream = new MemoryStream())
                 {
                     await fileDto.FormFile.CopyToAsync(stream);
-                    UploadedFile uploadedFile = new UploadedFile()
+                    Models.File uploadedFile = new Models.File()
                     {
                         FileName = fileName,
                         FileData = stream.ToArray(),
@@ -57,12 +58,32 @@ namespace landscape_architecture.WebAPI.Services
 
         /*
          * Takes a file from the database to download
-         * TODO: Implement this, we likely want to use a DTO to pass the file data back to the controller
          */
-        public async Task<(byte[], string, string)?> DownloadFile(string fileName)
+        public async Task<FileDownloadDTO?> DownloadFile(int fileId)
         {
-            var file = await _context.UploadedFiles.FirstOrDefaultAsync(f => f.FileName == fileName);
-            return null;
+            try
+            {
+                // Get the file from the database where the fileId matches the id of the file we want to download
+                Models.File file = await _context.UploadedFiles.Where(f => f.Id == fileId).FirstOrDefaultAsync();
+                if (file == null)
+                {
+                    return null;
+                }
+
+                // Create a FileDownloadDTO to return to the controller
+                FileDownloadDTO fileDto = new FileDownloadDTO()
+                {
+                    FileName = file.FileName,
+                    FileType = "application/octet-stream",
+                    FileData = file.FileData
+                };
+
+                return fileDto;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

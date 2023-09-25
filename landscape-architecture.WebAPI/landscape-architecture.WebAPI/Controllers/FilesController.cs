@@ -34,15 +34,14 @@ namespace landscape_architecture.WebAPI.Controllers
 
         [HttpGet]
         [Route("DownloadFile")]
-        public async Task<ActionResult> DownloadFile(string fileName)
+        public async Task<ActionResult> DownloadFile(int fileId)
         {
-            var result = await _filesService.DownloadFile(fileName);
+            var result = await _filesService.DownloadFile(fileId);
             if (result == null)
             {
                 return NotFound("File does not exist");
             }
-            // return File(); How do we return a file?
-            return Ok();
+            return File(result.FileData, result.FileType, result.FileName);
         }
     }
 }

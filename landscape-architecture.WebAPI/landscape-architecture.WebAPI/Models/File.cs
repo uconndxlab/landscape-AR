@@ -1,6 +1,6 @@
 ﻿namespace landscape_architecture.WebAPI.Models
 {
-    public class UploadedFile
+    public class File
     {
         public int Id { get; set; }
         public required string FileName { get; set; }
