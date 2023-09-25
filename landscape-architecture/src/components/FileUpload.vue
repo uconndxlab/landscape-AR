@@ -19,9 +19,10 @@
       </v-btn>
     </div>
 
-    <div v-if="fileSelected" class="d-flex">
-      <ModelView :blobUrl="blobUrl as string" />
-    </div>
+<!-- TODO: show this when 3D model rendering works, removing now for demo purposes -->
+<!--    <div v-if="fileSelected" class="d-flex">-->
+<!--      <ModelView :blobUrl="blobUrl as string" />-->
+<!--    </div>-->
   </v-card>
 
 </template>
