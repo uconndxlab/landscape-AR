@@ -6,6 +6,6 @@ namespace landscape_architecture.WebAPI.Services
     {
         Task<string> UploadFile(FileUploadDTO formFile);
 
-        Task<(byte[], string, string)?> DownloadFile(string fileName);
+        Task<FileDownloadDTO?> DownloadFile(int fileId);
     }
 }
