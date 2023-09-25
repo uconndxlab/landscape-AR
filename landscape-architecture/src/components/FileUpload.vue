@@ -1,5 +1,5 @@
 <template>
-  <v-container class="pa-6">
+  <v-card class="pa-6">
     <div class="d-flex">
       <v-file-input
         @change="onFileSelected"
@@ -18,13 +18,23 @@
         Upload
       </v-btn>
     </div>
-  </v-container>
+
+<!-- TODO: show this when 3D model rendering works, removing now for demo purposes -->
+<!--    <div v-if="fileSelected" class="d-flex">-->
+<!--      <ModelView :blobUrl="blobUrl as string" />-->
+<!--    </div>-->
+  </v-card>
 
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
+import ModelView from "@/components/ModelView.vue";
 
 const formData = new FormData();
+
+const blobUrl = ref<string>();
+const fileSelected = ref<boolean>(false);
 
 // Call this function when user selects a file
 const onFileSelected = (event: Event) => {
@@ -35,6 +45,11 @@ const onFileSelected = (event: Event) => {
   if (file.name.split('.').pop() !== 'obj') {
     return;
   }
+
+  // Update the ModelView component with the file
+  blobUrl.value = URL.createObjectURL(file);
+  console.log('blobUrl from FileUpload: ' + blobUrl.value);
+  fileSelected.value = true;
 
   // Add the file to the FormData object
   formData.append('formFile', file);
@@ -47,6 +62,7 @@ const onFileSelected = (event: Event) => {
 const clearFile = () => {
   formData.delete('formFile');
   formData.delete('fileName');
+  fileSelected.value = false;
 }
 
 // When the submit button is clicked, upload the file
