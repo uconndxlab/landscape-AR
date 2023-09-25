@@ -4,6 +4,6 @@ namespace landscape_architecture.WebAPI.Services
 {
     public interface IObjectToTopoServiceFacade
     {
-        public TopoDTO GetTopo();
+        public TopoDTO GetTopo(string fileName);
     }
 }
