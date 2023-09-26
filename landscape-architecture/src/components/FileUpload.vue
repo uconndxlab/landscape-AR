@@ -29,7 +29,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import ModelView from "@/components/ModelView.vue";
+// import ModelView from "@/components/ModelView.vue";
 
 const formData = new FormData();
 
