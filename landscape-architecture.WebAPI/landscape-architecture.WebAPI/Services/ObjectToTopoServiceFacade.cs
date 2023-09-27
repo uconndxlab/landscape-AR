@@ -30,12 +30,13 @@ namespace landscape_architecture.WebAPI.Services
             this._mapper = config.CreateMapper();
         }
 
-        public TopoDTO GetTopo(string fileName)
+        public TopoDTO GetTopo(int fileId)
         {
+             string fileName = this.StageFile(fileId).Result;
             InputParams inputParams = new InputParams();
             inputParams.xSize = 32;
             inputParams.ySize = 32;
-            var result = objectToTopo(ref inputParams);
+            var result = objectToTopo(ref inputParams, fileName);
 
             if (result)
             {
@@ -67,17 +68,24 @@ namespace landscape_architecture.WebAPI.Services
             return new TopoDTO();
         }
 
-        [DllImport("ConversionScripts.dll", CallingConvention = CallingConvention.Cdecl, SetLastError = true)]
-        public static extern bool objectToTopo(ref InputParams inputParams);
-
-        private async void StageFile(string fileName)
+        public async Task<string> StageFile(int fileId)
         {
-            var file = await _context.UploadedFiles.FindAsync(fileName);
+            var file = await _context.UploadedFiles.FindAsync(fileId);
             if (file == null)
             {
-                return;
+                return "";
             }
-            // create file within staging folder and write contents
+            byte[] data = file.FileData;
+            using (FileStream fs = File.Create(@"..\ConversionScripts\StagedFiles\" + file.FileName))
+            {
+                fs.Write(data, 0, data.Length);
+            }
+            return file.FileName;
         }
+
+
+        [DllImport("ConversionScripts.dll", CallingConvention = CallingConvention.Cdecl, SetLastError = true)]
+        public static extern bool objectToTopo(ref InputParams inputParams, string fileName);
+
     }
 }

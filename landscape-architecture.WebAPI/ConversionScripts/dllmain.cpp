@@ -35,7 +35,7 @@ struct InputParams
 #define EXPORTED_METHOD extern "C" __declspec(dllexport)
 
 EXPORTED_METHOD
-BOOL objectToTopo(InputParams* in) {
+BOOL objectToTopo(InputParams* in, const char* fileName) {
     // Allocate memory for rows
     int** pArray = static_cast<int**>(LocalAlloc(LMEM_FIXED, in->xSize * sizeof(int*)));
     if (!pArray)
@@ -49,7 +49,7 @@ BOOL objectToTopo(InputParams* in) {
             return false;
     }
     std::string baseDirectory = GetDLLDirectory();
-    std::string filePath = baseDirectory + "landscape-architecture.WebAPI\\ConversionScripts\\StagedFiles\\untitled.obj";
+    std::string filePath = baseDirectory + "landscape-architecture.WebAPI\\ConversionScripts\\StagedFiles\\" + fileName;
     ObjectToTopo ConversionObject(filePath, in->xSize, in->ySize, in->zSize, 'y'); // initialize conversion object with input params
     ConversionObject.readObj();
     ConversionObject.makeGrid();
@@ -64,6 +64,10 @@ BOOL objectToTopo(InputParams* in) {
         }
     }
     in->grid = pArray;
+    if (remove(filePath.c_str()) == 0)
+        return true;
+    else
+        std::cout << "Could not delete file" << std::endl;
 
     return true;
 }

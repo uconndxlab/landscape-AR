@@ -4,6 +4,7 @@ using landscape_architecture.WebAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Specialized;
 using Microsoft.AspNetCore.StaticFiles;
+using landscape_architecture.WebAPI.Migrations;
 
 namespace landscape_architecture.WebAPI.Services
 {
@@ -24,16 +25,17 @@ namespace landscape_architecture.WebAPI.Services
          * This file will be stored in the database as a byte array, with a generated GUID as the file name and the file extension.
          * Then we want to return the GUID to the controller as validation that the file was uploaded successfully.
          */
-        public async Task<string> UploadFile(FileUploadDTO fileDto)
+        public async Task<int> UploadFile(FileUploadDTO fileDto)
         {
             string fileName = "";
+            int fileId;
             try
             {
                 FileInfo fileInfo = new FileInfo(fileDto.FormFile.FileName);
                 string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileDto.FileName);
                 // Milliseconds since epoch, to ensure unique file names
                 long milliseconds = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-                fileName = fileNameWithoutExtension + "_" + milliseconds + fileInfo.Extension; 
+                fileName = fileNameWithoutExtension + "_" + milliseconds + fileInfo.Extension;
                 using (MemoryStream stream = new MemoryStream())
                 {
                     await fileDto.FormFile.CopyToAsync(stream);
@@ -45,8 +47,9 @@ namespace landscape_architecture.WebAPI.Services
                     };
                     _context.UploadedFiles.Add(uploadedFile);
                     await _context.SaveChangesAsync();
+                    fileId = uploadedFile.Id;
                 }
-                return fileName;
+                return fileId;
             }
             catch (Exception)
             {
