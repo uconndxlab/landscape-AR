@@ -1,5 +1,8 @@
 <template>
   <v-card class="pa-6">
+    <v-card-title class="text-h5">Upload 3D Object</v-card-title>
+    <br/>
+
     <div class="d-flex">
       <v-file-input
         @change="onFileSelected"
