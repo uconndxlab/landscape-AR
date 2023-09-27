@@ -20,9 +20,15 @@ namespace landscape_architecture.WebAPI.Controllers
         [HttpGet]
         [Route("GetTopoFromModel")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<TopoDTO> GetTopoFromModel()
+        public ActionResult<TopoDTO> GetTopoFromModel(int fileId)
         {
-            return _objectToTopoServiceFacade.GetTopo(); //How should we specify which model, filename?
+            var result = _objectToTopoServiceFacade.GetTopo(fileId);
+            if (result == null)
+            {
+                return NotFound("File does not exist");
+            }
+            return result;
+            
         }
     }
 }

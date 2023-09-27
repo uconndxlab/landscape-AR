@@ -21,7 +21,7 @@ namespace landscape_architecture.WebAPI.Controllers
 
         [HttpPost]
         [Route("UploadFile")]
-        public async Task<ActionResult> UploadFile([FromForm] FileUploadDTO fileDto)
+        public async Task<ActionResult<int>> UploadFile([FromForm] FileUploadDTO fileDto)
         {
             var result = await _filesService.UploadFile(fileDto);
             if (!ModelState.IsValid)
@@ -29,7 +29,7 @@ namespace landscape_architecture.WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            return Ok("Successfully uploaded file " + result);
+            return result;
         }
 
         [HttpGet]

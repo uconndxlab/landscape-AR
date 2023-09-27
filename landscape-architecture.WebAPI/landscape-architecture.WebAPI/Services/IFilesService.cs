@@ -4,7 +4,7 @@ namespace landscape_architecture.WebAPI.Services
 {
     public interface IFilesService
     {
-        Task<string> UploadFile(FileUploadDTO formFile);
+        Task<int> UploadFile(FileUploadDTO formFile);
 
         Task<FileDownloadDTO?> DownloadFile(int fileId);
     }
