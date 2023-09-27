@@ -1,11 +1,13 @@
 <template>
   <v-app>
+    <side-nav-bar />
     <v-main>
-      <FileUpload />
+      <default />
     </v-main>
   </v-app>
 </template>
 
 <script setup lang="ts">
-  import FileUpload from '@/components/FileUpload.vue'
+  import SideNavBar from "@/components/SideNavBar.vue";
+  import Default from "@/layouts/default/Default.vue";
 </script>
