@@ -1,9 +1,6 @@
 <template>
   <v-card class="pa-6">
     <v-card-title class="text-h5">Topo Display</v-card-title>
-    <br/>
-
-
       <div class="pa-6">
           <svg></svg>
       </div>
