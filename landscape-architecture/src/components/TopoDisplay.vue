@@ -14,12 +14,18 @@
 import { onMounted, ref} from 'vue'
 import * as d3 from 'd3'
 
-const dataArray = ref(null);
+interface DataType {
+  grid: number[][];
+  xSize: number;
+  ySize: number;
+}
+
+const dataArray = ref<DataType | null>(null);
 
   onMounted(async () => {
     // fetch the data based on the ID uploaded
     const response = await fetch('https://localhost:4000/api/v0/Model/GetTopoFromModel?fileId=6');
-    dataArray.value = await response.json();
+    dataArray.value = await response.json() as DataType;
 
     if (dataArray.value) {
         console.log(dataArray.value)
@@ -27,14 +33,20 @@ const dataArray = ref(null);
         // Setup SVG
         const n = dataArray.value.xSize;
         const m = dataArray.value.ySize;
-        const width = n + 10;
-        const height = m + 10;
+        const width = 600;
+        const height = Math.round(m / n * width);
+
+        // convert dataArray to 1D array
+        const grid = dataArray.value.grid.flat() as number[];
+
+        console.log(grid)
 
 
         // Create scale, contours, color, and path generator
         const path = d3.geoPath().projection(d3.geoIdentity().scale(width / n));
         const contours = d3.contours().size([n, m]);
-        const color = d3.scaleSequential(d3.interpolateTurbo).domain(d3.extent(dataArray.value.grid)).nice();
+        const color = d3.scaleSequential(d3.interpolateTurbo).domain(d3.extent(grid) as [number, number]);
+
 
         // Set SVG attributes
         const svg = d3.select("svg")
@@ -44,13 +56,14 @@ const dataArray = ref(null);
             .attr("style", "max-width: 100%; height: auto;");
 
         // Render contours
-        svg.append("g")
+        const g = svg.append("g");
+        g.append("g")
             .attr("stroke", "black")
             .selectAll()
-            .data(contours(dataArray.value.grid))
+            .data(contours(grid))
             .join("path")
-            .attr("d", d => path(contours.contour(dataArray.value.grid, d)))
-            .attr("fill", color);
+            .attr("d", path as any)
+            .attr("fill", d => color(d.value));
     }
 
   })
