@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@mdi/font": "7.0.96",
+    "d3": "^7.8.5",
     "pinia": "^2.0.23",
     "roboto-fontface": "*",
     "three": "^0.156.1",
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "@babel/types": "^7.21.4",
+    "@types/d3": "^7.4.1",
     "@types/node": "^18.15.0",
     "@types/three": "^0.156.0",
     "@types/webfontloader": "^1.6.35",

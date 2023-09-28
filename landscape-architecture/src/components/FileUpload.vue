@@ -1,5 +1,8 @@
 <template>
   <v-card class="pa-6">
+    <v-card-title class="text-h5">Upload 3D Object</v-card-title>
+    <br/>
+
     <div class="d-flex">
       <v-file-input
         @change="onFileSelected"
@@ -29,7 +32,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import ModelView from "@/components/ModelView.vue";
+// import ModelView from "@/components/ModelView.vue";
 
 const formData = new FormData();
 
