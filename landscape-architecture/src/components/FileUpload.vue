@@ -32,7 +32,10 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { useFilesStore } from "@/stores/files";
 // import ModelView from "@/components/ModelView.vue";
+
+const fileStore = useFilesStore();
 
 const formData = new FormData();
 
@@ -41,6 +44,7 @@ const fileSelected = ref<boolean>(false);
 
 // Call this function when user selects a file
 const onFileSelected = (event: Event) => {
+  console.log('file selected');
   const target = event.target as HTMLInputElement;
   const file: File = (target.files as FileList)[0];
 
@@ -51,14 +55,12 @@ const onFileSelected = (event: Event) => {
 
   // Update the ModelView component with the file
   blobUrl.value = URL.createObjectURL(file);
-  console.log('blobUrl from FileUpload: ' + blobUrl.value);
   fileSelected.value = true;
 
   // Add the file to the FormData object
   formData.append('formFile', file);
   formData.append('fileName', file.name);
 
-  console.log('File selected ' + file.name);
 }
 
 // When the clear icon is clicked, clear the file
@@ -85,7 +87,12 @@ const onSubmit = async () => {
   if (!response.ok) {
     throw new Error('Upload failed');
   }
-  console.log('Upload successful');
+
+
+  const fileId = await response.text();
+  console.log('file uploaded ' + fileId)
+
+  fileStore.setLatestFileId(Number(fileId));
 }
 </script>
 
