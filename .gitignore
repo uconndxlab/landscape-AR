@@ -10,7 +10,8 @@
 /landscape-architecture.WebAPI/landscape-architecture.WebAPI/bin/
 /landscape-architecture.WebAPI/landscape-architecture.WebAPI.tests/obj/
 /landscape-architecture.WebAPI/landscape-architecture.WebAPI.tests/bin/
-
+/landscape-architecture.WebAPI/build/
+/landscape-architecture.WebAPI/node_modules/
 
 #Junk Files
 *.DS_Store
