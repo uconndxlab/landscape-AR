@@ -4,16 +4,17 @@ interface IinputParams {
     xSize: number;
     ySize: number;
     zSize: number;
-    grid: number[][]; // 2D array
 }
 
 export const objectToTopoService = (): object => {
     let inputParams: IinputParams = {
-        "xSize": 64,
-        "ySize": 64,
-        "zSize": 64,
-        "grid": []
+        "xSize": 8,
+        "ySize": 8,
+        "zSize": 13,
     }
-    objectToTopo(inputParams);
+    const gridBuffer: number[] = new Array<number> (inputParams.xSize * inputParams.ySize);
+    console.log(inputParams.xSize, inputParams.ySize, inputParams.zSize);
+    objectToTopo(inputParams, gridBuffer);
+    console.log(gridBuffer);
     return inputParams;
 }
