@@ -4,14 +4,19 @@ exports.objectToTopoService = void 0;
 const objectToTopo = require("../../build/Release/ObjectToTopo");
 const objectToTopoService = () => {
     let inputParams = {
-        "xSize": 8,
-        "ySize": 8,
-        "zSize": 13,
+        "xSize": 16,
+        "ySize": 16,
+        "zSize": 16,
+        "fileName": "test.obj"
     };
-    const gridBuffer = new Array(inputParams.xSize * inputParams.ySize);
     console.log(inputParams.xSize, inputParams.ySize, inputParams.zSize);
-    objectToTopo(inputParams, gridBuffer);
-    console.log(gridBuffer);
-    return inputParams;
+    const gridBuffer = objectToTopo(inputParams);
+    console.log("converted");
+    return {
+        "xSize": inputParams.xSize,
+        "ySize": inputParams.ySize,
+        "zSize": inputParams.zSize,
+        "gridBuffer": gridBuffer
+    };
 };
 exports.objectToTopoService = objectToTopoService;

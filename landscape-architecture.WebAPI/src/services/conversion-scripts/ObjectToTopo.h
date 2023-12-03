@@ -2,12 +2,13 @@
 #include "Vec3.h"
 #include <vector>
 #include <string>
+#include <node_api.h>
 
 class ObjectToTopo
 {
 public:
 	ObjectToTopo();
-	ObjectToTopo(std::string _inFile, int _xs, int _ys, int _zs, char _axis) : inFile(_inFile), axisChar(_axis)
+	ObjectToTopo(std::string _inFile, int _xs, int _ys, int _zs, char _axis, napi_env _env) : inFile(_inFile), axisChar(_axis), env(_env)
 	{
 		topoSize.x = _xs;
 		topoSize.y = _ys;
@@ -22,7 +23,7 @@ public:
 	}
 
 	void readObj();
-	void makeGrid();
+	napi_value makeGrid();
 	void dump();
 	std::vector<std::vector<float>> getGrid() { return grid; }
 	std::vector<std::vector<int>> getIntGrid() { return intGrid; }
@@ -34,9 +35,10 @@ private:
 	std::string inFile;
 	std::vector<std::vector<float>> grid; // output xy grid of heights
 	std::vector<std::vector<int>> intGrid;
-	Vec3 topoSize;						  // Size of grid
-	Vec3 axis;							  // Which axis to represent as
+	Vec3 topoSize; // Size of grid
+	Vec3 axis;	   // Which axis to represent as
 	char axisChar;
+	napi_env env;
 
 	void updateBound(Vec3 v);
 	void fixZeros();

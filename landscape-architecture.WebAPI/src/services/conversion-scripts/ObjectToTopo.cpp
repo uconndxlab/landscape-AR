@@ -75,7 +75,7 @@ void ObjectToTopo::readObj()
 	}
 	xyz.shrink_to_fit();
 }
-void ObjectToTopo::makeGrid()
+napi_value ObjectToTopo::makeGrid()
 {
 	// Initialize matrix
 	grid.resize(topoSize.x);
@@ -114,13 +114,23 @@ void ObjectToTopo::makeGrid()
 		}
 	}
 	normalize();
+
+	napi_value nodeGrid;
+	napi_create_array_with_length(env, grid.size(), &nodeGrid);
 	for (int i = 0; i < grid.size(); i++)
 	{
-		for (int j = 0; j < grid.size(); j++)
+		napi_value rowArray;
+		napi_create_array_with_length(env, grid[i].size(), &rowArray);
+		for (int j = 0; j < grid[i].size(); j++)
 		{
-			intGrid[i][j] = static_cast<int>(grid[i][j] * 1000);
+			napi_value colValue;
+			napi_create_int32(env, static_cast<int>(grid[i][j] * 1000), &colValue);
+			napi_set_element(env, rowArray, j, colValue);
 		}
+		napi_set_element(env, nodeGrid, i, rowArray);
 	}
+	std::cout << "Done: makeGrid" << std::endl;
+	return nodeGrid;
 }
 
 void ObjectToTopo::updateBound(Vec3 v)

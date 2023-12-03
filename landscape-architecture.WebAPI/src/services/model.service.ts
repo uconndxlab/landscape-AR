@@ -4,17 +4,23 @@ interface IinputParams {
     xSize: number;
     ySize: number;
     zSize: number;
+    fileName: string;
 }
 
 export const objectToTopoService = (): object => {
     let inputParams: IinputParams = {
-        "xSize": 8,
-        "ySize": 8,
-        "zSize": 13,
+        "xSize": 16,
+        "ySize": 16,
+        "zSize": 16,
+        "fileName": "test.obj"
     }
-    const gridBuffer: number[] = new Array<number> (inputParams.xSize * inputParams.ySize);
     console.log(inputParams.xSize, inputParams.ySize, inputParams.zSize);
-    objectToTopo(inputParams, gridBuffer);
-    console.log(gridBuffer);
-    return inputParams;
+    const gridBuffer = objectToTopo(inputParams);
+    console.log("converted");
+    return {
+        "xSize": inputParams.xSize,
+        "ySize": inputParams.ySize,
+        "zSize": inputParams.zSize,
+        "gridBuffer": gridBuffer
+    };
 }
