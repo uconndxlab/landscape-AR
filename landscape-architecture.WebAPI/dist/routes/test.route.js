@@ -7,4 +7,5 @@ const express_1 = __importDefault(require("express"));
 const test_controller_1 = require("../controllers/test.controller");
 const router = express_1.default.Router();
 router.get('/', test_controller_1.getTest);
+router.get('/add', test_controller_1.addTest);
 exports.default = router;
