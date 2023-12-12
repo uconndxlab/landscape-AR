@@ -10,14 +10,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.uploadFile = void 0;
+const files_service_1 = require("../services/files.service");
 const uploadFile = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const file = req.body;
-        const { oringinalname, buffer } = req.file;
+        const file = req.file;
         if (!file) {
             throw new Error("No file provided");
         }
-        res.status(200).json({ message: "File uploaded successfully" });
+        const id = yield (0, files_service_1.uploadFileService)(file);
+        if (!id) {
+            throw new Error("File not successfully uploaded");
+        }
+        res.status(200).json({
+            message: "File uploaded successfully",
+            id: id
+        });
     }
     catch (err) {
         next(err);

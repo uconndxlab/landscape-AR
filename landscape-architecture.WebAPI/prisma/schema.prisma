@@ -10,6 +10,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  name String @unique
+model uploadedFile {
+  id        String   @id @default(uuid())
+  name      String
+  data      Bytes
+  updatedAt DateTime @updatedAt
 }

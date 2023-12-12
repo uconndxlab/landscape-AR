@@ -7,14 +7,7 @@ import { PrismaClient } from "@prisma/client";
 const BASE_ROUTE = '/api/v0';
 export const prisma = new PrismaClient();
 const app = express();
-const bodyParser = require('body-parser');
-const multer = require('multer');
-export const upload = multer({ dest: 'uploads/' });
 const cors = require('cors');
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(bodyParser.raw());
 
 app.use(cors({
     origin: '*'

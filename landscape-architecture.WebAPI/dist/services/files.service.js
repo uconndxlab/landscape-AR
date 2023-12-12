@@ -9,28 +9,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addTest = exports.getTest = void 0;
-const getTest = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.uploadFileService = void 0;
+const uuid_1 = require("uuid");
+const __1 = require("..");
+const uploadFileService = (file) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const blobData = file.buffer;
+        const fileToUpload = {
+            id: (0, uuid_1.v4)(),
+            name: file.originalname,
+            data: blobData,
+            updatedAt: new Date()
+        };
+        const createFile = yield __1.prisma.uploadedFile.create({ data: fileToUpload });
+        console.log(createFile);
+        return fileToUpload.id;
     }
     catch (err) {
-        console.error("error");
-        next(err);
+        throw new Error(err);
     }
 });
-exports.getTest = getTest;
-const addTest = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
-    try {
-        const name = (_a = req.query.name) === null || _a === void 0 ? void 0 : _a.toString();
-        console.log("name: ", name);
-        if (!name) {
-            throw new Error("Name is required");
-        }
-    }
-    catch (err) {
-        console.log("error");
-        next(err);
-    }
-});
-exports.addTest = addTest;
+exports.uploadFileService = uploadFileService;
