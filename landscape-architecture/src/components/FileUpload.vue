@@ -76,10 +76,11 @@ const onSubmit = async () => {
   if (!formData.has('formFile')) {
     return;
   }
+  console.log(formData);
 
   // Send the file to the API which takes a IFormFile as input
   // TODO: change endpoint to environment variable and to deployed endpoint (when it is deployed)
-  const response = await fetch('https://localhost:4000/api/v0/Files/UploadFile', {
+  const response = await fetch('http://localhost:8000/api/v0/files/upload', {
     method: 'POST',
     body: formData,
   });

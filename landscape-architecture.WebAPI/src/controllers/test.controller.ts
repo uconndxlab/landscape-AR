@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express"
 import { getTestService } from "../services/test.service"
-import prisma from "..";
+import { prisma } from "..";
 
 export const getTest = async (req: Request, res: Response, next: Function): Promise<void> => {
     try {
