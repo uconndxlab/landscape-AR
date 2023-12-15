@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.uploadFile = void 0;
+exports.downloadFile = exports.uploadFile = void 0;
 const files_service_1 = require("../services/files.service");
 const uploadFile = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -31,3 +31,26 @@ const uploadFile = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 exports.uploadFile = uploadFile;
+const downloadFile = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.query.id;
+        if (!id) {
+            res.status(400).send("No file id provided");
+        }
+        const fileData = yield (0, files_service_1.downloadFileService)(id);
+        if (!fileData) {
+            res.status(404).send("File not found");
+        }
+        res.writeHead(200, {
+            'Content-Type': 'text/plain',
+            'content-disposition': 'attachment; filename=' + id + '.obj'
+        });
+        res.end(fileData);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).send("Internal server error");
+        next(err);
+    }
+});
+exports.downloadFile = downloadFile;

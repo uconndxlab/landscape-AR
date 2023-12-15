@@ -24,3 +24,11 @@ export const uploadFileService = async (file: Express.Multer.File): Promise<stri
         throw new Error(err);
     }
 };
+
+export const downloadFileService = async (id: string): Promise<Buffer> => {
+    const file: UploadedFile | null = await prisma.uploadedFile.findUnique({ where: { id: id } });
+    if (!file) {
+        throw new Error("File not found");
+    }
+    return file.data;
+}

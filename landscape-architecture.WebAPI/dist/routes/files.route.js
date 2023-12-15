@@ -9,4 +9,5 @@ const router = express_1.default.Router();
 const multer = require('multer');
 const upload = multer({ storage: multer.memoryStorage() });
 router.post('/upload', upload.single('formFile'), files_controller_1.uploadFile);
+router.get('/download/:id', files_controller_1.downloadFile);
 exports.default = router;

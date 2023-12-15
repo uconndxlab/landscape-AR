@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.uploadFileService = void 0;
+exports.downloadFileService = exports.uploadFileService = void 0;
 const uuid_1 = require("uuid");
 const __1 = require("..");
 const uploadFileService = (file) => __awaiter(void 0, void 0, void 0, function* () {
@@ -30,3 +30,11 @@ const uploadFileService = (file) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.uploadFileService = uploadFileService;
+const downloadFileService = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const file = yield __1.prisma.uploadedFile.findUnique({ where: { id: id } });
+    if (!file) {
+        throw new Error("File not found");
+    }
+    return file.data;
+});
+exports.downloadFileService = downloadFileService;
