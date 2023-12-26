@@ -2,6 +2,6 @@ import express from "express"
 import { objectToTopo } from "../controllers/model.controller";
 const router = express.Router();
 
-router.get('/objectToTopo', objectToTopo);
+router.get('/objectToTopo/:id', objectToTopo);
 
 export default router;

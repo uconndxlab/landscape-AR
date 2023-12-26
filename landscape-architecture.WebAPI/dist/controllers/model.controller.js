@@ -13,7 +13,11 @@ exports.objectToTopo = void 0;
 const model_service_1 = require("../services/model.service");
 const objectToTopo = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        res.json((0, model_service_1.objectToTopoService)());
+        const id = req.params.id;
+        if (!id) {
+            res.status(400).send("No file id provided");
+        }
+        res.json(yield (0, model_service_1.objectToTopoService)(id));
     }
     catch (err) {
         console.error("error");

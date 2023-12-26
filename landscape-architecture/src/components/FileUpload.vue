@@ -38,6 +38,10 @@ const fileSelected = ref<boolean>(false);
 
 // Call this function when user selects a file
 const onFileSelected = (event: Event) => {
+  if (formData.has("formFile")) {
+    formData.delete("formFile");
+    formData.delete("fileName");
+  }
   console.log("file selected");
   const target = event.target as HTMLInputElement;
   const file: File = (target.files as FileList)[0];
@@ -82,10 +86,10 @@ const onSubmit = async () => {
     throw new Error("Upload failed");
   }
 
-  const fileId = await response.text();
-  console.log("file uploaded " + fileId);
+  const fileId = await response.json();
+  console.log("file uploaded " + fileId.id);
 
-  fileStore.setLatestFileId(Number(fileId));
+  fileStore.setLatestFileId(fileId.id);
 };
 </script>
 

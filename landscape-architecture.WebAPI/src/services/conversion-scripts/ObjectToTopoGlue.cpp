@@ -58,11 +58,12 @@ napi_value ObjectToTopoC(napi_env env, napi_callback_info info)
     InputParams inputParams = ExtractInputParams(env, args[0]);
 
     std::filesystem::path currentPath = std::filesystem::current_path();
-    std::string fileName = currentPath.string() + "/src/services/conversion-scripts/stagedFiles/" + inputParams.fileName;
+    std::string fileName = currentPath.string() + "\\src\\services\\conversion-scripts\\stagedFiles\\" + inputParams.fileName;
+    std::cout << "fileName: " << fileName << std::endl;
     ObjectToTopo converter(fileName, inputParams.xSizeS, inputParams.ySizeS, inputParams.zSizeS, 'y', env);
     converter.readObj();
     napi_value result = converter.makeGrid();
-    std::cout << "after converting" << std::endl;
+
     return result;
 }
 
@@ -70,7 +71,6 @@ napi_value init(napi_env env, napi_value exports)
 {
     napi_value ObjectToTopoFacade;
     napi_create_function(env, nullptr, NAPI_AUTO_LENGTH, ObjectToTopoC, nullptr, &ObjectToTopoFacade);
-    std::cout << "after funcion return" << std::endl;
     return ObjectToTopoFacade;
 }
 

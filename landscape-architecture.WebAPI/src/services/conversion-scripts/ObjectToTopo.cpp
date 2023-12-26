@@ -18,6 +18,8 @@ ObjectToTopo::ObjectToTopo() : axisChar('y')
 
 void ObjectToTopo::readObj()
 {
+	std::cout << "Reading obj file..." << std::endl;
+	std::cout << inFile << std::endl;
 	std::ifstream obj(inFile);
 	xyz.clear();
 
@@ -124,9 +126,11 @@ napi_value ObjectToTopo::makeGrid()
 		for (int j = 0; j < grid[i].size(); j++)
 		{
 			napi_value colValue;
+			std::cout << grid[i][j] * 1000 << " ";
 			napi_create_int32(env, static_cast<int>(grid[i][j] * 1000), &colValue);
 			napi_set_element(env, rowArray, j, colValue);
 		}
+		std::cout << std::endl;
 		napi_set_element(env, nodeGrid, i, rowArray);
 	}
 	std::cout << "Done: makeGrid" << std::endl;
@@ -159,7 +163,7 @@ void ObjectToTopo::dump()
 	std::cout << "Dumping..." << std::endl;
 	for (int i = 0; i < 10; i++)
 	{
-		std::cout << xyz[i].x << " " << xyz[i].y << " " << xyz[i].z << std::endl;
+		std::cout << xyz[i].x * 100 << " " << xyz[i].y * 100 << " " << xyz[i].z * 100 << std::endl;
 	}
 }
 
