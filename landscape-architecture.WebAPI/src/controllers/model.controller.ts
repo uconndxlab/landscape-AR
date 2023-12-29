@@ -1,11 +1,12 @@
+import BadRequestError from "../errors/BadRequestError";
 import { objectToTopoService } from "../services/model.service";
 import { Request, Response } from "express"
 
 export const objectToTopo = async (req: Request, res: Response, next: Function): Promise<void> => {
     try {
-        const id: string | null = req.params.id;
+        const id: string | null = req.query.id?.toString() || null;
         if (!id) {
-            res.status(400).send("No file id provided");
+            throw new BadRequestError({ message: "id is required", logging: true })
         }
 
         res.json(await objectToTopoService(id));
