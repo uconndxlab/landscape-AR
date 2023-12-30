@@ -1,3 +1,4 @@
+import InternalServerError from "../errors/InternalServerError";
 import { downloadFileService } from "./files.service";
 import fs from 'fs';
 
@@ -54,22 +55,36 @@ const deleteFile = (fileId: string): Promise<void> => {
 export const objectToTopoService = async (id: string): Promise<object> => {
     try {
         await stageFile(id);
-        let inputParams: IinputParams = {
-            "xSize": 16,
-            "ySize": 16,
-            "zSize": 16,
-            "fileName": id + ".obj"
-        }
-        const gridBuffer = objectToTopo(inputParams);
-        await deleteFile(id);
-        return {
-            "xSize": inputParams.xSize,
-            "ySize": inputParams.ySize,
-            "zSize": inputParams.zSize,
-            "gridBuffer": gridBuffer
-        };
-    } catch (err) {
-        console.error(err);
-        throw err;
+    } catch (stagingError) {
+        throw new InternalServerError({ message: "File not properly staged for conversion", logging: true });
     }
+    const inputParams: IinputParams = {
+        "xSize": 16,
+        "ySize": 16,
+        "zSize": 16,
+        "fileName": id + ".obj"
+    }
+    let gridBuffer: number[][] | null = null;
+    try {
+        gridBuffer = objectToTopo(inputParams);
+        if (!gridBuffer) {
+            throw new InternalServerError({ message: "File Conversion Failed", logging: true });
+        }
+    } catch (conversionError) {
+        throw new InternalServerError({ message: "File Conversion Failed", logging: true });
+    }
+    if (!gridBuffer) {
+        throw new InternalServerError({ message: "Conversion failed ", logging: true });
+    }
+    try {
+        await deleteFile(id);
+    } catch (deleteFileError) {
+        throw new InternalServerError({ logging: true });
+    }
+    return {
+        "xSize": inputParams.xSize,
+        "ySize": inputParams.ySize,
+        "zSize": inputParams.zSize,
+        "gridBuffer": gridBuffer
+    };
 }
