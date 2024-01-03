@@ -8,14 +8,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.objectToTopo = void 0;
+const BadRequestError_1 = __importDefault(require("../errors/BadRequestError"));
 const model_service_1 = require("../services/model.service");
 const objectToTopo = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
-        const id = req.params.id;
+        const id = ((_a = req.query.id) === null || _a === void 0 ? void 0 : _a.toString()) || null;
         if (!id) {
-            res.status(400).send("No file id provided");
+            throw new BadRequestError_1.default({ message: "id is required", logging: true });
         }
         res.json(yield (0, model_service_1.objectToTopoService)(id));
     }

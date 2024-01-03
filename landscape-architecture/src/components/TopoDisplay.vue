@@ -48,7 +48,7 @@ async function fetchAndRenderTopo(fileId: number) {
   topoIsDisplayed.value = true;
   // fetch the data based on the ID uploaded
   const response = await fetch(
-    `http://localhost:8000/api/v0/model/objectToTopo/${fileId}`,
+    `http://localhost:8000/api/v0/model/objectToTopo?id=${fileId}`,
     {
       method: "GET",
     }

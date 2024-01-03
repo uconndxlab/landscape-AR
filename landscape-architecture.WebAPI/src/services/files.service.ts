@@ -1,5 +1,7 @@
 import { v4 as uuidv4, v4 } from 'uuid';
 import { prisma } from '..';
+import NotFoundError from '../errors/NotFoundError';
+import InternalServerError from '../errors/InternalServerError';
 
 interface UploadedFile {
     id: string;
@@ -21,14 +23,14 @@ export const uploadFileService = async (file: Express.Multer.File): Promise<stri
         console.log(createFile);
         return fileToUpload.id;
     } catch (err: any) {
-        throw new Error(err);
+        throw new InternalServerError({ message: "File Failed to Upload to Server", logging: true });
     }
 };
 
 export const downloadFileService = async (id: string): Promise<Buffer> => {
     const file: UploadedFile | null = await prisma.uploadedFile.findUnique({ where: { id: id } });
     if (!file) {
-        throw new Error("File not found");
+        throw new NotFoundError({ message: "File Not Found", logging: true });
     }
     return file.data;
 }
