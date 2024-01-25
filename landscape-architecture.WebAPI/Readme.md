@@ -16,4 +16,8 @@ Follow the steps below to host the Web API locally for development.
     1. Install node-gyp globally with `npm install -g node-gyp`. This command needs to be run as an administrator
     2. Run the command `node-gyp configure`
     3. Run the command `node-gyp build`. This will build the C++ code located at `./src/services/conversion-scripts`
-5. Run the command `npm run dev` to host the API locally
+5. Set up the MySQL database
+    1. Ensure that MySQL server is installed on your machine
+    2. Create a .env file to house the database url `DATABASE_URL=mysql://myUser:mypassword@localhost:3306/landcape-AR?connectionLimit=10`
+    3. Run the command `npx prisma migrate dev --name init` to run a migration and generate the schema
+6. Run the command `npm run dev` to host the API locally

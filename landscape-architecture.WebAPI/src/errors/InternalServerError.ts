@@ -4,7 +4,7 @@ export default class InternalServerError extends BaseError {
     private static readonly DEFAULT_STATUS_CODE = 500;
     private readonly _statusCode: number;
     private readonly _logging: boolean;
-    private readonly _context: { [ker: string]: any };
+    private readonly _context: { [key: string]: any };
 
     constructor(params?: { statusCode?: number, message?: string, logging?: boolean, context?: [key: string] | any }) {
         const { statusCode, message, logging } = params || {};
