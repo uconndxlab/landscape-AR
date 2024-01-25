@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.objectToTopoService = void 0;
+const InternalServerError_1 = __importDefault(require("../errors/InternalServerError"));
 const files_service_1 = require("./files.service");
 const fs_1 = __importDefault(require("fs"));
 const objectToTopo = require("../../build/Release/ObjectToTopo");
@@ -56,24 +57,40 @@ const deleteFile = (fileId) => {
 const objectToTopoService = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield stageFile(id);
-        let inputParams = {
-            "xSize": 16,
-            "ySize": 16,
-            "zSize": 16,
-            "fileName": id + ".obj"
-        };
-        const gridBuffer = objectToTopo(inputParams);
+    }
+    catch (stagingError) {
+        throw new InternalServerError_1.default({ message: "File not properly staged for conversion", logging: true });
+    }
+    const inputParams = {
+        "xSize": 51,
+        "ySize": 51,
+        "zSize": 51,
+        "fileName": id + ".obj"
+    };
+    let gridBuffer = null;
+    try {
+        gridBuffer = objectToTopo(inputParams);
+        if (!gridBuffer) {
+            throw new InternalServerError_1.default({ message: "File Conversion Failed", logging: true });
+        }
+    }
+    catch (conversionError) {
+        throw new InternalServerError_1.default({ message: "File Conversion Failed", logging: true });
+    }
+    if (!gridBuffer) {
+        throw new InternalServerError_1.default({ message: "Conversion failed ", logging: true });
+    }
+    try {
         yield deleteFile(id);
-        return {
-            "xSize": inputParams.xSize,
-            "ySize": inputParams.ySize,
-            "zSize": inputParams.zSize,
-            "gridBuffer": gridBuffer
-        };
     }
-    catch (err) {
-        console.error(err);
-        throw err;
+    catch (deleteFileError) {
+        throw new InternalServerError_1.default({ logging: true });
     }
+    return {
+        "xSize": inputParams.xSize,
+        "ySize": inputParams.ySize,
+        "zSize": inputParams.zSize,
+        "gridBuffer": gridBuffer
+    };
 });
 exports.objectToTopoService = objectToTopoService;

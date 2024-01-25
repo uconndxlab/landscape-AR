@@ -8,10 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.downloadFileService = exports.uploadFileService = void 0;
 const uuid_1 = require("uuid");
 const __1 = require("..");
+const NotFoundError_1 = __importDefault(require("../errors/NotFoundError"));
+const InternalServerError_1 = __importDefault(require("../errors/InternalServerError"));
 const uploadFileService = (file) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const blobData = file.buffer;
@@ -26,14 +31,14 @@ const uploadFileService = (file) => __awaiter(void 0, void 0, void 0, function* 
         return fileToUpload.id;
     }
     catch (err) {
-        throw new Error(err);
+        throw new InternalServerError_1.default({ message: "File Failed to Upload to Server", logging: true });
     }
 });
 exports.uploadFileService = uploadFileService;
 const downloadFileService = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const file = yield __1.prisma.uploadedFile.findUnique({ where: { id: id } });
     if (!file) {
-        throw new Error("File not found");
+        throw new NotFoundError_1.default({ message: "File Not Found", logging: true });
     }
     return file.data;
 });
