@@ -59,9 +59,9 @@ export const objectToTopoService = async (id: string): Promise<object> => {
         throw new InternalServerError({ message: "File not properly staged for conversion", logging: true });
     }
     const inputParams: IinputParams = {
-        "xSize": 16,
-        "ySize": 16,
-        "zSize": 16,
+        "xSize": 32,
+        "ySize": 32,
+        "zSize": 32,
         "fileName": id + ".obj"
     }
     let gridBuffer: number[][] | null = null;
