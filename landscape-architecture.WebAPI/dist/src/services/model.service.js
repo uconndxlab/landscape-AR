@@ -16,7 +16,7 @@ exports.objectToTopoService = void 0;
 const InternalServerError_1 = __importDefault(require("../errors/InternalServerError"));
 const files_service_1 = require("./files.service");
 const fs_1 = __importDefault(require("fs"));
-const objectToTopo = require("../../build/Release/ObjectToTopo");
+const objectToTopo = require("../../../build/Release/ObjectToTopo");
 const stageFile = (fileId) => {
     return new Promise((resolve, reject) => {
         (0, files_service_1.downloadFileService)(fileId)
@@ -62,9 +62,9 @@ const objectToTopoService = (id) => __awaiter(void 0, void 0, void 0, function* 
         throw new InternalServerError_1.default({ message: "File not properly staged for conversion", logging: true });
     }
     const inputParams = {
-        "xSize": 16,
-        "ySize": 16,
-        "zSize": 16,
+        "xSize": 32,
+        "ySize": 32,
+        "zSize": 32,
         "fileName": id + ".obj"
     };
     let gridBuffer = null;
