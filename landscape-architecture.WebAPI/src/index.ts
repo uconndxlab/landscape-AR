@@ -19,6 +19,7 @@ app.use(BASE_ROUTE + '/files', files);
 app.use(errorHandler);
 
 const port = process.env.PORT || 8000;
-
-app.listen(port, () => console.log(`App listening on PORT ${port}`));
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(port, () => console.log(`App listening on PORT ${port}`));
+}
 

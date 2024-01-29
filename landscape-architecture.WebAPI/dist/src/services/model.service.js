@@ -16,7 +16,7 @@ exports.objectToTopoService = void 0;
 const InternalServerError_1 = __importDefault(require("../errors/InternalServerError"));
 const files_service_1 = require("./files.service");
 const fs_1 = __importDefault(require("fs"));
-const objectToTopo = require("../../../build/Release/ObjectToTopo");
+const objectToTopo = require("../../build/Release/ObjectToTopo");
 const stageFile = (fileId) => {
     return new Promise((resolve, reject) => {
         (0, files_service_1.downloadFileService)(fileId)

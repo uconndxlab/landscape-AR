@@ -20,4 +20,6 @@ app.use(BASE_ROUTE + '/model', model_route_1.default);
 app.use(BASE_ROUTE + '/files', files_route_1.default);
 app.use(errors_1.errorHandler);
 const port = process.env.PORT || 8000;
-app.listen(port, () => console.log(`App listening on PORT ${port}`));
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(port, () => console.log(`App listening on PORT ${port}`));
+}

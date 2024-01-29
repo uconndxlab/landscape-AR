@@ -4,5 +4,8 @@ module.exports = {
   testEnvironment: 'node',
   testEnvironmentOptions: {
     serverPort: 8081,
-  }
+  },
+  roots: [
+    '<rootDir>/tests',
+  ]
 };

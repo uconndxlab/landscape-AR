@@ -12,6 +12,13 @@ struct InputParams
     std::string fileName;
 };
 
+#ifdef _WIN32
+#define PATH_SEPARATOR "\\"
+#else
+#define PATH_SEPARATOR "/"
+#endif
+
+
 size_t fileNameSize;
 
 InputParams ExtractInputParams(napi_env env, napi_value obj)
