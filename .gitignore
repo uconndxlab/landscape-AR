@@ -48,7 +48,6 @@ ipch/
 *.vspscc
 *.vssscc
 *.bak.*
-*.bak
 
 #Tools
 _ReSharper.*

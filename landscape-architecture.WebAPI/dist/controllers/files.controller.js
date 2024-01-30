@@ -8,18 +8,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.downloadFile = exports.uploadFile = void 0;
 const files_service_1 = require("../services/files.service");
+const BadRequestError_1 = __importDefault(require("../errors/BadRequestError"));
+const InternalServerError_1 = __importDefault(require("../errors/InternalServerError"));
+const NotFoundError_1 = __importDefault(require("../errors/NotFoundError"));
 const uploadFile = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const file = req.file;
         if (!file) {
-            throw new Error("No file provided");
+            throw new BadRequestError_1.default({ message: "No File Provided", logging: true });
         }
         const id = yield (0, files_service_1.uploadFileService)(file);
         if (!id) {
-            throw new Error("File not successfully uploaded");
+            throw new InternalServerError_1.default({ message: "File upload failed", logging: true });
         }
         res.status(200).json({
             message: "File uploaded successfully",
@@ -35,11 +41,11 @@ const downloadFile = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
     try {
         const id = req.query.id;
         if (!id) {
-            res.status(400).send("No file id provided");
+            throw new BadRequestError_1.default({ message: "Id is required", logging: true });
         }
         const fileData = yield (0, files_service_1.downloadFileService)(id);
         if (!fileData) {
-            res.status(404).send("File not found");
+            throw new NotFoundError_1.default({ message: "File Not Found", logging: true });
         }
         res.writeHead(200, {
             'Content-Type': 'text/plain',
@@ -49,7 +55,6 @@ const downloadFile = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
     }
     catch (err) {
         console.error(err);
-        res.status(500).send("Internal server error");
         next(err);
     }
 });
