@@ -8,8 +8,8 @@ datasource db {
 }
 
 model UploadedFiles {
-  Id        String    @id @db.VarChar(255)
-  Name      String    @db.VarChar(255)
+  Id        String   @id @default(uuid())
+  Name      String
   Data      Bytes
-  UpdatedAt DateTime? @default(now()) @db.Timestamp(0)
+  UpdatedAt DateTime @updatedAt
 }
