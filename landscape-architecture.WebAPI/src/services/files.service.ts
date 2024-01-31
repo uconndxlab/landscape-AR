@@ -4,10 +4,10 @@ import NotFoundError from '../errors/NotFoundError';
 import InternalServerError from '../errors/InternalServerError';
 
 interface UploadedFile {
-    Id: string; // Note the uppercase 'Id'
+    Id: string;
     Name: string;
     Data: Buffer;
-    UpdatedAt: Date | string | null;
+    UpdatedAt: Date | string | undefined;
 }
 
 export const uploadFileService = async (file: Express.Multer.File): Promise<string> => {
