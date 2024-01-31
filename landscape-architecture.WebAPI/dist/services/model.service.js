@@ -62,9 +62,9 @@ const objectToTopoService = (id) => __awaiter(void 0, void 0, void 0, function* 
         throw new InternalServerError_1.default({ message: "File not properly staged for conversion", logging: true });
     }
     const inputParams = {
-        "xSize": 16,
-        "ySize": 16,
-        "zSize": 16,
+        "xSize": 51,
+        "ySize": 51,
+        "zSize": 51,
         "fileName": id + ".obj"
     };
     let gridBuffer = null;
