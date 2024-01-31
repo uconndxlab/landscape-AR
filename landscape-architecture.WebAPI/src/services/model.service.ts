@@ -1,5 +1,5 @@
 import InternalServerError from "../errors/InternalServerError";
-import { downloadFileService } from "./files.service";
+import {downloadFileService} from "./files.service";
 import fs from 'fs';
 
 const objectToTopo = require("../../build/Release/ObjectToTopo")
@@ -20,11 +20,11 @@ const stageFile = (fileId: string): Promise<void> => {
                     throw new Error('File not found');
                 }
 
-                const currentDir: string = __dirname;
-                const filePath: string = `${currentDir}/../../src/services/conversion-scripts/stagedFiles/${fileId}.obj`;
+                const filePath: string = `${__dirname}/../../src/services/conversion-scripts/stagedFiles/${fileId}.obj`;
 
                 fs.writeFile(filePath, fileData.toString(), (err) => {
                     if (err) {
+                        console.log(err)
                         reject(err);
                     } else {
                         resolve(); // File is written successfully
@@ -39,8 +39,7 @@ const stageFile = (fileId: string): Promise<void> => {
 
 const deleteFile = (fileId: string): Promise<void> => {
     return new Promise((resolve, reject) => {
-        const currentDir: string = __dirname;
-        const filePath: string = `${currentDir}/../../src/services/conversion-scripts/stagedFiles/${fileId}.obj`;
+        const filePath: string = `${__dirname}/../../src/services/conversion-scripts/stagedFiles/${fileId}.obj`;
         fs.unlink(filePath, (err) => {
             if (err) {
                 reject(err);

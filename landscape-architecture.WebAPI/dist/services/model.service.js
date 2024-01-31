@@ -28,6 +28,7 @@ const stageFile = (fileId) => {
             const filePath = `${currentDir}/../../src/services/conversion-scripts/stagedFiles/${fileId}.obj`;
             fs_1.default.writeFile(filePath, fileData.toString(), (err) => {
                 if (err) {
+                    console.log(err);
                     reject(err);
                 }
                 else {
