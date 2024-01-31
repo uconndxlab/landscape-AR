@@ -7,7 +7,7 @@ interface UploadedFile {
     Id: string;
     Name: string;
     Data: Buffer;
-    UpdatedAt: Date | string | undefined;
+    UpdatedAt: Date;
 }
 
 export const uploadFileService = async (file: Express.Multer.File): Promise<string> => {
