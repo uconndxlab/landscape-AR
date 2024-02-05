@@ -4,12 +4,6 @@
 #include "ObjectToTopo.h"
 #include <filesystem>
 
-#ifdef _WIN32
-#define PATH_SEPARATOR "\\"
-#else
-#define PATH_SEPARATOR "/"
-#endif
-
 struct InputParams
 {
     int64_t xSizeS;
@@ -17,6 +11,13 @@ struct InputParams
     int64_t zSizeS;
     std::string fileName;
 };
+
+#ifdef _WIN32
+#define PATH_SEPARATOR "\\"
+#else
+#define PATH_SEPARATOR "/"
+#endif
+
 
 size_t fileNameSize;
 
