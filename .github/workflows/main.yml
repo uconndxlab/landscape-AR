@@ -1,1 +1,49 @@
 
+on:
+    push:
+      branches:
+        - main
+  
+jobs:
+    test:
+      runs-on: ubuntu-latest
+  
+      strategy:
+        matrix:
+          node-version: [14]
+  
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+  
+        - name: Setup Node.js
+          uses: actions/setup-node@v3
+          with:
+            node-version: ${{ matrix.node-version }}
+  
+        - name: Install dependencies
+          run: npm install
+  
+        - name: Setup Prisma
+          run: |
+            npm install prisma --save-dev
+            npx prisma init
+            echo 'datasource db {
+              provider = "mysql"
+              url      = env("DATABASE_URL")
+            }
+  
+            generator client {
+              provider = "prisma-client-js"
+            }' > prisma/schema.prisma
+            npx prisma db pull
+            npx prisma generate
+  
+        - name: Setup node-gyp
+          run: |
+            npm install -g node-gyp
+            node-gyp configure
+            node-gyp build
+  
+        - name: Run tests
+          run: npm test
