@@ -26,6 +26,7 @@ jobs:
   
         - name: Setup node-gyp
           run: |
+            cd landscape-architecture.WebAPI
             npm install -g node-gyp
             node-gyp configure
             node-gyp build
