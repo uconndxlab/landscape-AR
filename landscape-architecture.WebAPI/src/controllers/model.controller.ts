@@ -9,7 +9,7 @@ export const objectToTopo = async (req: Request, res: Response, next: Function):
             throw new BadRequestError({ message: "id is required", logging: true })
         }
 
-        res.json(await objectToTopoService(id));
+        res.json(await objectToTopoService(id, 32, 32 ,32));
     } catch (err) {
         console.error("error");
         next(err);

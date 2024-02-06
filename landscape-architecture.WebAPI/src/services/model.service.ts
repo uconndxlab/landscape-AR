@@ -12,6 +12,13 @@ interface IinputParams {
     fileName: string;
 }
 
+export interface ObjectToTopoResponse {
+    xSize: number;
+    ySize: number;
+    zSize: number;
+    gridBuffer: number[][];
+}
+
 const stageFile = (fileId: string): Promise<void> => {
     return new Promise((resolve, reject) => {
         downloadFileService(fileId)
@@ -51,16 +58,19 @@ const deleteFile = (fileId: string): Promise<void> => {
 }
 
 
-export const objectToTopoService = async (id: string): Promise<object> => {
+export const objectToTopoService = async (id: string, xs: number, ys: number, zs: number): Promise<ObjectToTopoResponse> => {
+    if (xs <= 0 || ys <= 0 || zs <= 0) {
+        throw new InternalServerError({ message: "Invalid input parameters", logging: true });
+    }
     try {
         await stageFile(id);
     } catch (stagingError) {
         throw new InternalServerError({ message: "File not properly staged for conversion", logging: true });
     }
     const inputParams: IinputParams = {
-        "xSize": 32,
-        "ySize": 32,
-        "zSize": 32,
+        "xSize": xs,
+        "ySize": ys,
+        "zSize": zs,
         "fileName": id + ".obj"
     }
     let gridBuffer: number[][] | null = null;
@@ -80,10 +90,11 @@ export const objectToTopoService = async (id: string): Promise<object> => {
     } catch (deleteFileError) {
         throw new InternalServerError({ logging: true });
     }
-    return {
+    const response: ObjectToTopoResponse = {
         "xSize": inputParams.xSize,
         "ySize": inputParams.ySize,
         "zSize": inputParams.zSize,
         "gridBuffer": gridBuffer
     };
+    return response;
 }
