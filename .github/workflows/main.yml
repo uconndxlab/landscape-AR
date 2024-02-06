@@ -22,21 +22,6 @@ jobs:
         - name: Install dependencies
           run: npm install
   
-        - name: Setup Prisma
-          run: |
-            npm install prisma --save-dev
-            npx prisma init
-            echo 'datasource db {
-              provider = "mysql"
-              url      = env("DATABASE_URL")
-            }
-  
-            generator client {
-              provider = "prisma-client-js"
-            }' > prisma/schema.prisma
-            npx prisma db pull
-            npx prisma generate
-  
         - name: Setup node-gyp
           run: |
             npm install -g node-gyp
