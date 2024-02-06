@@ -20,7 +20,9 @@ jobs:
             node-version: ${{ matrix.node-version }}
   
         - name: Install dependencies
-          run: npm install
+          run: |
+            cd landscape-architecture.WebAPI
+            npm install
   
         - name: Setup node-gyp
           run: |
