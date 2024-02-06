@@ -4,33 +4,33 @@ import NotFoundError from '../errors/NotFoundError';
 import InternalServerError from '../errors/InternalServerError';
 
 interface UploadedFile {
-    Id: string;
-    Name: string;
-    Data: Buffer;
-    UpdatedAt: Date;
+    id: string;
+    name: string;
+    data: Buffer;
+    updatedAt: Date;
 }
 
 export const uploadFileService = async (file: Express.Multer.File): Promise<string> => {
     try {
         const blobData = file.buffer;
         const fileToUpload: UploadedFile = {
-            Id: uuidv4(),
-            Name: file.originalname,
-            Data: blobData,
-            UpdatedAt: new Date()
+            id: uuidv4(),
+            name: file.originalname,
+            data: blobData,
+            updatedAt: new Date()
         };
-        const createFile = await prisma.uploadedFiles.create({ data: fileToUpload });
+        const createFile = await prisma.uploadedFile.create({ data: fileToUpload });
         console.log(createFile);
-        return fileToUpload.Id;
+        return fileToUpload.id;
     } catch (err: any) {
         throw new InternalServerError({ message: "File Failed to Upload to Server", logging: true });
     }
 };
 
 export const downloadFileService = async (id: string): Promise<Buffer> => {
-    const file: UploadedFile | null = await prisma.uploadedFiles.findUnique({ where: { Id: id } });
+    const file: UploadedFile | null = await prisma.uploadedFile.findUnique({ where: { id: id } });
     if (!file) {
         throw new NotFoundError({ message: "File Not Found", logging: true });
     }
-    return file.Data;
+    return file.data;
 }
