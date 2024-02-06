@@ -32,4 +32,6 @@ jobs:
             node-gyp build
   
         - name: Run tests
-          run: npm test
+          run: |
+            cd landscape-architecture.WebAPI
+            npm test
