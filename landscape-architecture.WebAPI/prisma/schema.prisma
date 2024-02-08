@@ -7,9 +7,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model uploadedFile {
-  id        String   @id
-  name      String
-  data      Bytes
-  updatedAt DateTime
+model UploadedFiles {
+  Id        String    @id @db.VarChar(255)
+  Name      String    @db.VarChar(255)
+  Data      Bytes
+  UpdatedAt DateTime? @default(now()) @db.Timestamp(0)
 }

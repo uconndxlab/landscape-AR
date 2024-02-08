@@ -2,7 +2,7 @@
   "name": "landscape-architecture.webapi",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test jest --testTimeout=5000 --detectOpenHandles",
     "start": "node dist/index.js",
