@@ -5,7 +5,6 @@ import InternalServerError from "../errors/InternalServerError";
 import NotFoundError from "../errors/NotFoundError";
 
 export const uploadFile = async (req: any, res: Response, next: Function): Promise<void> => {
-    try {
         const file = req.file;
         if (!file) {
             throw new BadRequestError({ message: "No File Provided", logging: true });
@@ -18,9 +17,6 @@ export const uploadFile = async (req: any, res: Response, next: Function): Promi
             message: "File uploaded successfully",
             id: id
         });
-    } catch (err) {
-        next(err);
-    }
 }
 
 export const downloadFile = async (req: Request, res: Response, next: Function): Promise<void> => {
