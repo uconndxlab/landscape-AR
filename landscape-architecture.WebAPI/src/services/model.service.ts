@@ -26,8 +26,7 @@ const stageFile = (fileId: string): Promise<void> => {
                 if (!fileData) {
                     throw new Error('File not found');
                 }
-
-                const filePath: string = `${__dirname}/../../../src/services/conversion-scripts/stagedFiles/${fileId}.obj`;
+                const filePath: string = `${process.cwd()}/src/services/conversion-scripts/stagedFiles/${fileId}.obj`;
 
                 fs.writeFile(filePath, fileData.toString(), (err) => {
                     if (err) {
@@ -46,7 +45,7 @@ const stageFile = (fileId: string): Promise<void> => {
 
 const deleteFile = (fileId: string): Promise<void> => {
     return new Promise((resolve, reject) => {
-        const filePath: string = `${__dirname}/../../../src/services/conversion-scripts/stagedFiles/${fileId}.obj`;
+        const filePath: string = `${process.cwd}/src/services/conversion-scripts/stagedFiles/${fileId}.obj`;
         fs.unlink(filePath, (err) => {
             if (err) {
                 reject(err);

@@ -35,6 +35,7 @@
     "uuid": "^9.0.1"
   },
   "_moduleAliases": {
-    "@cpp": "build/Release"
+    "@cpp": "build/Release",
+    "@services": "src/services"
   }
 }
