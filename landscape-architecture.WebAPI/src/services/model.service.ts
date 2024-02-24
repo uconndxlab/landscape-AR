@@ -2,7 +2,7 @@ import InternalServerError from "../errors/InternalServerError";
 import {downloadFileService} from "./files.service";
 import fs from 'fs';
 
-const objectToTopo = require("../../../build/Release/ObjectToTopo")
+const objectToTopo = require("@cpp/ObjectToTopo")
 
 
 interface IinputParams {

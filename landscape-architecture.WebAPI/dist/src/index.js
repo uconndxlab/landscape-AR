@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.prisma = void 0;
+require('module-alias/register');
 const express_1 = __importDefault(require("express"));
 const model_route_1 = __importDefault(require("./routes/model.route"));
 const files_route_1 = __importDefault(require("./routes/files.route"));
