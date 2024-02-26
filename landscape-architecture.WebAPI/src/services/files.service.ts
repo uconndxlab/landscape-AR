@@ -2,6 +2,8 @@ import { v4 as uuidv4, v4 } from 'uuid';
 import { prisma } from '..';
 import NotFoundError from '../errors/NotFoundError';
 import InternalServerError from '../errors/InternalServerError';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import BadRequestError from "../errors/BadRequestError";
 
 interface UploadedFile {
     Id: string;
@@ -34,4 +36,18 @@ export const downloadFileService = async (id: string): Promise<Buffer> => {
         throw new NotFoundError({ message: "File Not Found", logging: true });
     }
     return file.Data;
+}
+
+export const deleteFileService = async  (id: string): Promise<boolean> => {
+    console.log("deleteFileService");
+    try {
+        const deleteFile: UploadedFile = await prisma.uploadedFiles.delete({where: {Id: id}});
+    } catch (err: any) {
+        if (err.type === PrismaClientKnownRequestError) {
+            throw new InternalServerError({message: "Requested File does not exist", logging: true});
+        } else {
+            throw new InternalServerError({message: "An unknown error occurred", logging: true});
+        }
+    }
+    return true;
 }

@@ -1,3 +1,5 @@
+require('module-alias/register')
+
 import express from "express";
 import model from "./routes/model.route";
 import files from "./routes/files.route";
