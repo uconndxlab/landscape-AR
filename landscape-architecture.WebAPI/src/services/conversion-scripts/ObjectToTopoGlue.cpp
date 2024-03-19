@@ -18,7 +18,6 @@ struct InputParams
 #define PATH_SEPARATOR "/"
 #endif
 
-
 size_t fileNameSize;
 
 InputParams ExtractInputParams(napi_env env, napi_value obj)
@@ -65,12 +64,12 @@ napi_value ObjectToTopoC(napi_env env, napi_callback_info info)
     InputParams inputParams = ExtractInputParams(env, args[0]);
 
     std::filesystem::path currentPath = std::filesystem::current_path();
-    std::string fileName = currentPath.string() + PATH_SEPARATOR + "src" + PATH_SEPARATOR + "services" + PATH_SEPARATOR + "conversion-scripts" + PATH_SEPARATOR + "stagedFiles" + PATH_SEPARATOR + inputParams.fileName;
+    std::string fileName = currentPath.string() + PATH_SEPARATOR + "src" + PATH_SEPARATOR + "services" + PATH_SEPARATOR + "conversion-scripts" + PATH_SEPARATOR + "stagedFiles" + PATH_SEPARATOR + "landscape5rgb.ply"; // TODO CHANGE THIS TO BE DYNAMIC
     std::cout << "fileName: " << fileName << std::endl;
     ObjectToTopo converter(fileName, inputParams.xSizeS, inputParams.ySizeS, inputParams.zSizeS, 'y', env);
-    converter.readObj();
-    napi_value result = converter.makeGrid();
-
+    converter.readPLY();
+    // napi_value result = converter.makeGrid();
+    napi_value result;
     return result;
 }
 

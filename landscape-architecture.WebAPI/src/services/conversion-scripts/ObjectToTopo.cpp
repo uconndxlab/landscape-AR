@@ -8,9 +8,22 @@
 #include <cmath>
 #include <iomanip>
 #include <limits>
+#include <sstream>
 
 #define MAX_FLT std::numeric_limits<float>::max()
 #define MIN_FLT std::numeric_limits<float>::min()
+
+std::vector<std::string> splitString(std::string str, std::string delim)
+{
+	std::string token;
+	std::stringstream ss(str);
+	std::vector<std::string> v;
+	while (std::getline(ss, token, ' '))
+	{
+		v.push_back(token);
+	}
+	return v;
+}
 
 ObjectToTopo::ObjectToTopo() : axisChar('y')
 {
@@ -77,6 +90,49 @@ void ObjectToTopo::readObj()
 	}
 	xyz.shrink_to_fit();
 }
+
+void ObjectToTopo::readPLY()
+{
+	std::cout << "Reading PLY File..." << std::endl;
+	std::ifstream ply(inFile);
+	xyz.clear();
+
+	lCorner.fill(MAX_FLT);
+	hCorner.fill(MIN_FLT);
+	std::string line;
+
+	int num_properties = 0;
+	int num_vertices;
+	int num_elements = 0;
+
+	bool header = true;
+
+	// Parse Header
+	while (std::getline(ply, line) && header == true && num_elements <= 1)
+	{
+		if (line.find("end_header") != std::string::npos)
+		{
+			header = false;
+		}
+		std::vector<std::string> lineVector = splitString(line, " ");
+		if (lineVector[0] == "element")
+		{
+			num_elements++;
+			if (lineVector[1] == "vertex")
+			{
+				num_vertices = std::stoi(lineVector[2]);
+				std::cout << line << std::endl;
+			}
+		}
+		if (lineVector[0] == "property")
+		{
+			num_properties++;
+		}
+	}
+	std::cout << "Num properties: " << num_properties << std::endl;
+	std::cout << "Num vertices: " << num_vertices << std::endl;
+}
+
 napi_value ObjectToTopo::makeGrid()
 {
 	// Initialize matrix
