@@ -23,6 +23,7 @@ public:
 	}
 
 	void readObj();
+	void readPLY();
 	napi_value makeGrid();
 	void dump();
 	std::vector<std::vector<float>> getGrid() { return grid; }
