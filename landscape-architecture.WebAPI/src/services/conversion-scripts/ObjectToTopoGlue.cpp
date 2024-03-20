@@ -64,12 +64,11 @@ napi_value ObjectToTopoC(napi_env env, napi_callback_info info)
     InputParams inputParams = ExtractInputParams(env, args[0]);
 
     std::filesystem::path currentPath = std::filesystem::current_path();
-    std::string fileName = currentPath.string() + PATH_SEPARATOR + "src" + PATH_SEPARATOR + "services" + PATH_SEPARATOR + "conversion-scripts" + PATH_SEPARATOR + "stagedFiles" + PATH_SEPARATOR + "landscape5rgb.ply"; // TODO CHANGE THIS TO BE DYNAMIC
+    std::string fileName = currentPath.string() + PATH_SEPARATOR + "src" + PATH_SEPARATOR + "services" + PATH_SEPARATOR + "conversion-scripts" + PATH_SEPARATOR + "stagedFiles" + PATH_SEPARATOR + "apple.ply"; // TODO CHANGE THIS TO BE DYNAMIC
     std::cout << "fileName: " << fileName << std::endl;
     ObjectToTopo converter(fileName, inputParams.xSizeS, inputParams.ySizeS, inputParams.zSizeS, 'y', env);
     converter.readPLY();
-    // napi_value result = converter.makeGrid();
-    napi_value result;
+    napi_value result = converter.makeGrid();
     return result;
 }
 

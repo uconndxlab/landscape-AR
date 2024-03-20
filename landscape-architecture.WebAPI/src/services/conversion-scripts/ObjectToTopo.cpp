@@ -9,6 +9,7 @@
 #include <iomanip>
 #include <limits>
 #include <sstream>
+#include <cmath>
 
 #define MAX_FLT std::numeric_limits<float>::max()
 #define MIN_FLT std::numeric_limits<float>::min()
@@ -23,6 +24,11 @@ std::vector<std::string> splitString(std::string str, std::string delim)
 		v.push_back(token);
 	}
 	return v;
+}
+
+float sigmoid(float x)
+{
+	return 1 / (1 + exp(-x));
 }
 
 ObjectToTopo::ObjectToTopo() : axisChar('y')
@@ -93,6 +99,7 @@ void ObjectToTopo::readObj()
 
 void ObjectToTopo::readPLY()
 {
+	xyz.clear();
 	std::cout << "Reading PLY File..." << std::endl;
 	std::ifstream ply(inFile);
 	xyz.clear();
@@ -131,6 +138,46 @@ void ObjectToTopo::readPLY()
 	}
 	std::cout << "Num properties: " << num_properties << std::endl;
 	std::cout << "Num vertices: " << num_vertices << std::endl;
+
+	//Parse body
+	//Assumes x, y, z are the first 3 properties
+	int cycle_value = 0;
+	int num_processed_vertices = 0;
+	Vec3 persistent_v;
+	int i = 0;
+	while (std::getline(ply, line) && num_processed_vertices < num_vertices)
+	{
+		i++;
+		std::vector<std::string> lineVec = splitString(line, " ");
+		if (lineVec.size() != 1)
+		{
+			for (std::string property : lineVec)
+			{
+				cycle_value++;
+				if (cycle_value == 1)
+				{
+					persistent_v.x = (std::stof(property)); // add sigmoid to these on actual examples
+				}
+				if (cycle_value == 2)
+				{
+					persistent_v.y = (std::stof(property));
+				}
+				if (cycle_value == 3)
+				{
+					persistent_v.z = (std::stof(property));
+				}
+				if (cycle_value == num_properties) //Finished processing vertex
+				{
+					Vec3 v = persistent_v;
+					cycle_value = 0;
+					updateBound(v);
+					xyz.push_back(v);
+					num_processed_vertices++;
+				}
+			}
+		}
+	}
+	xyz.shrink_to_fit();
 }
 
 napi_value ObjectToTopo::makeGrid()
@@ -182,8 +229,10 @@ napi_value ObjectToTopo::makeGrid()
 		for (int j = 0; j < grid[i].size(); j++)
 		{
 			napi_value colValue;
-			std::cout << grid[i][j] * 1000 << " ";
-			napi_create_int32(env, static_cast<int>(grid[i][j] * 1000), &colValue);
+			std::cout << floor(grid[i][j] * 1000) << " ";
+			float val = std::floor(grid[i][j] * 1000);
+			
+			napi_create_int32(env, static_cast<int>(val), &colValue);
 			napi_set_element(env, rowArray, j, colValue);
 		}
 		std::cout << std::endl;

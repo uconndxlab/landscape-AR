@@ -85,7 +85,7 @@ export const objectToTopoService = async (id: string, xs: number, ys: number, zs
         throw new InternalServerError({ message: "Conversion failed ", logging: true });
     }
     try {
-        await deleteFile(id);
+        //await deleteFile(id);
     } catch (deleteFileError) {
         throw new InternalServerError({ logging: true });
     }
