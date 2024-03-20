@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { downloadFileService, uploadFileService, deleteFileService } from "../services/files.service";
+import {downloadFileService, uploadFileService, deleteFileService, getFileDataService} from "../services/files.service";
 import BadRequestError from "../errors/BadRequestError";
 import InternalServerError from "../errors/InternalServerError";
 import NotFoundError from "../errors/NotFoundError";
@@ -47,5 +47,13 @@ export const deleteFile = async (req: Request, res: Response, next: Function): P
         });
     } else {
         throw new InternalServerError({message: "file deletion failed", logging: true});
+    }
+}
+
+export const getAllFiles = async(req: Request, res: Response, next: Function): Promise<void> => {
+    if (await getFileDataService()) {
+        res.status(200).json({
+
+        })
     }
 }

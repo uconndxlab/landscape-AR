@@ -45,7 +45,8 @@ const stageFile = (fileId: string): Promise<void> => {
 
 const deleteFile = (fileId: string): Promise<void> => {
     return new Promise((resolve, reject) => {
-        const filePath: string = `${process.cwd}/src/services/conversion-scripts/stagedFiles/${fileId}.obj`;
+        const filePath: string = `${process.cwd()}/src/services/conversion-scripts/stagedFiles/${fileId}.obj`;
+        console.log(filePath)
         fs.unlink(filePath, (err) => {
             if (err) {
                 reject(err);
@@ -81,13 +82,10 @@ export const objectToTopoService = async (id: string, xs: number, ys: number, zs
     } catch (conversionError) {
         throw new InternalServerError({ message: "File Conversion Failed", logging: true });
     }
-    if (!gridBuffer) {
-        throw new InternalServerError({ message: "Conversion failed ", logging: true });
-    }
     try {
         await deleteFile(id);
     } catch (deleteFileError) {
-        throw new InternalServerError({ logging: true });
+        throw new InternalServerError({message: "file deletion failed", logging: true });
     }
     const response: ObjectToTopoResponse = {
         "xSize": inputParams.xSize,

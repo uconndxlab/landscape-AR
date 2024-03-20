@@ -51,3 +51,13 @@ export const deleteFileService = async  (id: string): Promise<boolean> => {
     }
     return true;
 }
+
+export const getFileDataService = async (): Promise<any> => {
+    console.log("getting files");
+    try {
+        const files = await prisma.uploadedFiles.findMany()
+        console.log(files);
+    } catch (err:any) {
+        throw new InternalServerError({message: "Error fetching file data", logging: true});
+    }
+}

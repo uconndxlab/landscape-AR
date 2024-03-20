@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ca1bc92d-01e0-4dab-8745-3eb34646c418" name="Changes" comment="Fixed jest config">
+      <change afterPath="$PROJECT_DIR$/landscape-architecture/src/views/UploadedFiles.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/landscape-architecture.WebAPI/src/controllers/files.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/landscape-architecture.WebAPI/src/controllers/files.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/landscape-architecture.WebAPI/src/routes/files.route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/landscape-architecture.WebAPI/src/routes/files.route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/landscape-architecture.WebAPI/src/services/files.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/landscape-architecture.WebAPI/src/services/files.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/landscape-architecture.WebAPI/src/services/model.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/landscape-architecture.WebAPI/src/services/model.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/landscape-architecture/src/router/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/landscape-architecture/src/router/index.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+        <option value="Vue Composition API Component" />
+      </list>
+    </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="false" />
+    <option name="myAllFileTypesSelected" value="true" />
+    <option name="mySelectedFileTypes">
+      <set />
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="main" />
+      </list>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2c8pqLBNE5T8ObODjwQxFQCkb9I" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "file-gallery",
+    "last_opened_file_path": "/Users/parker/Desktop/Code/landscape-AR",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
+    "ts.external.directory.path": "/Users/parker/Desktop/Code/landscape-AR/landscape-architecture/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "vue.recent.templates": [
+      "Vue Composition API Component"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/landscape-architecture.WebAPI/src" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ca1bc92d-01e0-4dab-8745-3eb34646c418" name="Changes" comment="" />
+      <created>1707503251838</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1707503251838</updated>
+      <workItem from="1707503254041" duration="338000" />
+      <workItem from="1707503619412" duration="591000" />
+      <workItem from="1707759654858" duration="1397000" />
+      <workItem from="1707935222833" duration="2150000" />
+      <workItem from="1708024362234" duration="1491000" />
+      <workItem from="1708456007344" duration="453000" />
+      <workItem from="1708526375538" duration="1137000" />
+      <workItem from="1708727589598" duration="7808000" />
+      <workItem from="1708993248262" duration="1129000" />
+      <workItem from="1709162787723" duration="1198000" />
+      <workItem from="1709264876789" duration="559000" />
+      <workItem from="1709492940583" duration="68000" />
+      <workItem from="1709513820468" duration="223000" />
+      <workItem from="1709567922201" duration="2026000" />
+      <workItem from="1709820704222" duration="925000" />
+      <workItem from="1710013058356" duration="4435000" />
+    </task>
+    <task id="LOCAL-00001" summary="Added Module Aliases">
+      <option name="closed" value="true" />
+      <created>1708734472377</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1708734472377</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Fixed jest config">
+      <option name="closed" value="true" />
+      <created>1708736878137</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1708736878137</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/landscape-architecture.WebAPI/tests/models/objectToTopo.service.test.js" />
+        <option value="$PROJECT_DIR$/landscape-architecture.WebAPI/tests/models/objectToTopo.service.test.js" />
+      </list>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added Module Aliases" />
+    <MESSAGE value="Fixed jest config" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed jest config" />
+  </component>
+</project>
