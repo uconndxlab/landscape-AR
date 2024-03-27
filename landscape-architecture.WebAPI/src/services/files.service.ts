@@ -12,6 +12,12 @@ interface UploadedFile {
     UpdatedAt: Date | null;
 }
 
+export interface FileInfo {
+    Id: string;
+    Name: string;
+    UpdatedAt: Date | null;
+}
+
 export const uploadFileService = async (file: Express.Multer.File): Promise<string> => {
     try {
         const blobData = file.buffer;
@@ -52,11 +58,22 @@ export const deleteFileService = async  (id: string): Promise<boolean> => {
     return true;
 }
 
-export const getFileDataService = async (): Promise<any> => {
+export const getFileDataService = async (): Promise<FileInfo[]> => {
     console.log("getting files");
     try {
-        const files = await prisma.uploadedFiles.findMany()
-        console.log(files);
+        const files: UploadedFile[] = await prisma.uploadedFiles.findMany()
+        if (!files) {
+            throw new NotFoundError({message: "No files found", logging: true});
+        }
+        let fileInfo: FileInfo[] = [];
+        files.forEach((file) => {
+            fileInfo.push({
+                Id: file.Id,
+                Name: file.Name,
+                UpdatedAt: file.UpdatedAt
+            })
+        })
+        return fileInfo;
     } catch (err:any) {
         throw new InternalServerError({message: "Error fetching file data", logging: true});
     }
