@@ -8,7 +8,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 router.post('/upload', upload.single('formFile'), uploadFile);
 router.get('/download/:id', downloadFile);
-router.get('/delete', deleteFile);
+router.delete('/delete', deleteFile);
 router.get('/getAllFiles', getAllFiles)
 
 
