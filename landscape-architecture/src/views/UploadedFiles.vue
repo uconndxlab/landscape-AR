@@ -1,6 +1,6 @@
 <template>
-  <div :key="key">
-    <v-card class="ma-12 pa-6">
+  <div>
+    <v-card class="ma-12 pa-6" :key="key">
       <v-card-title>Uploaded Files</v-card-title>
       <v-card-text class="mx-auto">
         <v-progress-circular v-if="!fileData" indeterminate class="mx-auto" />
@@ -21,7 +21,9 @@
           </v-card>
         </div>
         <div class="d-flex">
-          <v-btn class="mx-auto" @click="onDeleteClicked">Delete</v-btn>
+          <v-btn class="mx-auto" @click="onDeleteClicked" v-if="fileData"
+            >Delete</v-btn
+          >
         </div>
       </v-card-text>
     </v-card>
@@ -104,9 +106,9 @@ const abortDelete = () => {
 const startDelete = async () => {
   console.log("Starting delete process");
   deleting.value = true;
-  selectedFiles.value.forEach(async (file) => {
+  const deletePromises = selectedFiles.value.map((file) => {
     console.log("Deleting file with ID: ", file.Id);
-    await fetch(`http://localhost:8000/api/v0/files/delete/?id=${file.Id}`, {
+    return fetch(`http://localhost:8000/api/v0/files/delete/?id=${file.Id}`, {
       method: "DELETE",
     }).then((response) => {
       if (response.ok) {
@@ -115,14 +117,15 @@ const startDelete = async () => {
       }
     });
   });
-  console.log(successfullyDeleted.value.length, selectedFiles.value.length);
-  console.log(successfullyDeleted.value, selectedFiles.value);
-  if (successfullyDeleted.value.length === selectedFiles.value.length) {
-    console.log("All files deleted successfully");
-    selectedFiles.value = [];
-    successfullyDeleted.value = [];
-    dialog.value = false;
-    key.value += 1;
-  }
+
+  // Waiting for all promises to resolve
+  await Promise.all(deletePromises);
+
+  console.log("All files deleted successfully");
+  selectedFiles.value = [];
+  successfullyDeleted.value = [];
+  dialog.value = false;
+  key.value += 1;
+  window.location.reload();
 };
 </script>
