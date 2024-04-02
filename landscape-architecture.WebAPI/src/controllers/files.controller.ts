@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { downloadFileService, uploadFileService, deleteFileService } from "../services/files.service";
+import {downloadFileService, uploadFileService, deleteFileService, getFileDataService, FileInfo} from "../services/files.service";
 import BadRequestError from "../errors/BadRequestError";
 import InternalServerError from "../errors/InternalServerError";
 import NotFoundError from "../errors/NotFoundError";
@@ -48,4 +48,12 @@ export const deleteFile = async (req: Request, res: Response, next: Function): P
     } else {
         throw new InternalServerError({message: "file deletion failed", logging: true});
     }
+}
+
+export const getAllFiles = async(req: Request, res: Response, next: Function): Promise<void> => {
+    const files: FileInfo[] = await getFileDataService();
+    if (!files) {
+        throw new NotFoundError({message: "No files found", logging: true});
+    }
+    res.status(200).json(files);
 }
